@@ -9,8 +9,7 @@ namespace tnguyenResume.Bussiness.Model
     [Table("Account")]
     public partial class Account
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [StringLength(50)]
         public string UserName { get; set; }
@@ -20,7 +19,5 @@ namespace tnguyenResume.Bussiness.Model
 
         [StringLength(50)]
         public string Role { get; set; }
-
-        public virtual Information Information { get; set; }
     }
 }

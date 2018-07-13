@@ -10,21 +10,24 @@ namespace tnguyenResume.Bussiness.DAL
 {
     public class WorkDAL : IWorkDAL
     {
-        private readonly ItnguyenResumeDbContext _itnguyenResumeDbContext;
+        //private ItnguyenResumeDbContext _itnguyenResumeDbContext;
 
-        public WorkDAL(ItnguyenResumeDbContext itnguyenResumeDbContext)
+        tnguyenResumeDbContext _itnguyenResumeDbContext = null;
+
+        public WorkDAL()
         {
-            _itnguyenResumeDbContext = itnguyenResumeDbContext;
+            _itnguyenResumeDbContext = new tnguyenResumeDbContext();
         }
+
 
         public IEnumerable<Work> GetAllWorks()
         {
-            var userId = int.Parse(_itnguyenResumeDbContext.Works.ElementAt(0).ID_User.ToString());
+            var userId = _itnguyenResumeDbContext.Works.FirstOrDefault().ID_User ?? Guid.Empty;
             var result = _itnguyenResumeDbContext.Works.Where(t => t.ID_User == userId).OrderByDescending(t => t.WorksDate.Value.Year).ToList();
             return result ?? null;
         }
 
-        public IEnumerable<Work> GetWorkById(int bookId)
+        public IEnumerable<Work> GetWorkById(Guid bookId)
         {
             var result = _itnguyenResumeDbContext.Works.Where(n => n.ID == bookId);
             return result ?? null;

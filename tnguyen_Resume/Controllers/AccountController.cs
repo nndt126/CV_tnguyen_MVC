@@ -184,7 +184,7 @@ namespace tnguyen_Resume.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public long ThemTaiKhoanFaceBook(Account acc)
+        public Guid ThemTaiKhoanFaceBook(Account acc)
         {
             var _acc = db.Accounts.SingleOrDefault(x => x.UserName == acc.UserName);
             if (acc != null)

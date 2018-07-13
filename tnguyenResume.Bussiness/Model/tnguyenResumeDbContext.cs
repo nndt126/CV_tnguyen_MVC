@@ -4,13 +4,21 @@ namespace tnguyenResume.Bussiness.Model
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using Interface;
 
-    public partial class tnguyenResumeDbContext : DbContext, ItnguyenResumeDbContext
+    public partial class tnguyenResumeDbContext : DbContext
     {
         public tnguyenResumeDbContext()
             : base("name=tnguyenResumeDbContext")
         {
+            try
+            {
+                Database.SetInitializer<tnguyenResumeDbContext>(null);
+                Database.SetInitializer(new CreateDatabaseIfNotExists<tnguyenResumeDbContext>());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
@@ -24,34 +32,6 @@ namespace tnguyenResume.Bussiness.Model
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Information>()
-                .HasOptional(e => e.Account)
-                .WithRequired(e => e.Information);
-
-            modelBuilder.Entity<Information>()
-                .HasMany(e => e.Educations)
-                .WithOptional(e => e.Information)
-                .HasForeignKey(e => e.ID_User);
-
-            modelBuilder.Entity<Information>()
-                .HasMany(e => e.Projects)
-                .WithOptional(e => e.Information)
-                .HasForeignKey(e => e.ID_User);
-
-            modelBuilder.Entity<Information>()
-                .HasMany(e => e.Skills)
-                .WithOptional(e => e.Information)
-                .HasForeignKey(e => e.ID_User);
-
-            modelBuilder.Entity<Information>()
-                .HasMany(e => e.Testimonials)
-                .WithOptional(e => e.Information)
-                .HasForeignKey(e => e.ID_User);
-
-            modelBuilder.Entity<Information>()
-                .HasMany(e => e.Works)
-                .WithOptional(e => e.Information)
-                .HasForeignKey(e => e.ID_User);
         }
     }
 }

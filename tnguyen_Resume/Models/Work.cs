@@ -14,13 +14,11 @@ namespace tnguyen_Resume.Models
     
     public partial class Work
     {
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string WorksTitle { get; set; }
         public string WorksInfo { get; set; }
         public Nullable<System.DateTime> WorksDate { get; set; }
         public string WorksDetail { get; set; }
-        public Nullable<int> ID_User { get; set; }
-    
-        public virtual Information Information { get; set; }
+        public Nullable<System.Guid> ID_User { get; set; }
     }
 }

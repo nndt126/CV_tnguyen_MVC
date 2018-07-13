@@ -40,8 +40,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -3693,7 +3693,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\tnguyenResume.Bussiness\tnguyenResume.Bussiness.csproj">
-      <Project>{B314000B-C3EE-4530-A5E9-47E3A2311228}</Project>
+      <Project>{6a9a7dab-fd8e-472d-b9f4-e9723d4e3708}</Project>
       <Name>tnguyenResume.Bussiness</Name>
     </ProjectReference>
   </ItemGroup>

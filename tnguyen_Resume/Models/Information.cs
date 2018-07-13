@@ -14,17 +14,7 @@ namespace tnguyen_Resume.Models
     
     public partial class Information
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Information()
-        {
-            this.Educations = new HashSet<Education>();
-            this.Projects = new HashSet<Project>();
-            this.Skills = new HashSet<Skill>();
-            this.Testimonials = new HashSet<Testimonial>();
-            this.Works = new HashSet<Work>();
-        }
-    
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string FullName { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -33,17 +23,5 @@ namespace tnguyen_Resume.Models
         public string Image { get; set; }
         public string Email { get; set; }
         public string About { get; set; }
-    
-        public virtual Account Account { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Education> Educations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project> Projects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Skill> Skills { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Testimonial> Testimonials { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Work> Works { get; set; }
     }
 }

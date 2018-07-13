@@ -1,4 +1,5 @@
-﻿@using tnguyen_Resume.Models;
+﻿@*@using tnguyen_Resume.Models;*@
+@using tnguyenResume.Bussiness.Model;
 <!DOCTYPE html>
 <!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
@@ -93,14 +94,14 @@
     <!-- About Section
     ================================================== -->
     <section id="about">
-        @Html.Action("InformationPartial", "Home")
+        @*@Html.Action("InformationPartial", "Home")*@
     </section> <!-- About Section End-->
     <!-- Resume Section
     ================================================== -->
     <section id="resume">
         <!-- Education
         ----------------------------------------------- -->
-        @Html.Action("EducationPartial", "Resume")
+        @*@Html.Action("EducationPartial", "Resume")*@
         <!-- End Education -->
         <!-- Work
         ----------------------------------------------- -->
@@ -108,18 +109,18 @@
          <!-- End Work -->
         <!-- Skills
         ----------------------------------------------- -->
-        @Html.Action("SkillPartial", "Resume")
+        @*@Html.Action("SkillPartial", "Resume")*@
 
     </section> <!-- Resume Section End-->
     <!-- project Section
     ================================================== -->
     <section id="project">
-        @Html.Action("ProjectPartial", "Project")
+        @*@Html.Action("ProjectPartial", "Project")*@
     </section> <!-- project Section End-->
     <!-- Testimonials Section
     ================================================== -->
     <section id="testimonials">
-        @Html.Action("TestimonialPartial", "Resume")
+        @*@Html.Action("TestimonialPartial", "Resume")*@
     </section> <!-- Testimonials Section End-->
     <!-- Contact Section
     ================================================== -->
@@ -149,7 +150,7 @@
                         <span>(84) 909 921 135</span>
                     </p>
                 </div>
-                @Html.Action("ProjectPartialFooter", "Home")
+                @*@Html.Action("ProjectPartialFooter", "Home")*@
             </aside>
         </div>
     </section> <!-- Contact Section End-->

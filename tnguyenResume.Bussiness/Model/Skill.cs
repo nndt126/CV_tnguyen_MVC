@@ -8,7 +8,7 @@ namespace tnguyenResume.Bussiness.Model
 
     public partial class Skill
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [Column(TypeName = "ntext")]
         public string SkillsTitle { get; set; }
@@ -16,8 +16,6 @@ namespace tnguyenResume.Bussiness.Model
         [StringLength(50)]
         public string SkillValue { get; set; }
 
-        public int? ID_User { get; set; }
-
-        public virtual Information Information { get; set; }
+        public Guid? ID_User { get; set; }
     }
 }

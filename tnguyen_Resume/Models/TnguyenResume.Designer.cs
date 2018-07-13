@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Code-AvTech\CV tnguyen MVC Angular\tnguyen_Resume\Models\TnguyenResume.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Code\CV_tnguyen_MVC\tnguyen_Resume\Models\TnguyenResume.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

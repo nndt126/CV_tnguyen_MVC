@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B314000B-C3EE-4530-A5E9-47E3A2311228}</ProjectGuid>
+    <ProjectGuid>{6A9A7DAB-FD8E-472D-B9F4-E9723D4E3708}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>tnguyenResume.Bussiness</RootNamespace>

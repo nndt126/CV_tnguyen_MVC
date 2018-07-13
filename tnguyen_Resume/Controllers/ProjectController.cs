@@ -23,7 +23,7 @@ namespace tnguyen_Resume.Controllers
         public PartialViewResult ProjectPartial()
         {
             //Lấy ra Ma User đầu tiên trong csdl
-            int id_User = int.Parse(db.Projects.ToList().ElementAt(0).ID_User.ToString());
+            Guid id_User = db.Projects.ToList().ElementAt(0).ID_User ?? Guid.Empty;
             //int id_User = 1;
             var pj = db.Projects.Where(t => t.ID_User == id_User).OrderByDescending(t=>t.ProjectTime).ToList();
             return PartialView(pj);
@@ -53,7 +53,7 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetProjectsByID(int Id)
+        public JsonResult GetProjectsByID(Guid Id)
         {
             db = new tnguyenResumeEntities();
             var jSonWork = db.Projects.Where(n => n.ID == Id).ToList();
@@ -71,7 +71,7 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditProject(int sID, string sProjectImage, string sProjectTitle, string sProjectInfo, string sProjectDetail, string sProjectJob, string sProjectURL, string sProjectTime)
+        public JsonResult EditProject(Guid sID, string sProjectImage, string sProjectTitle, string sProjectInfo, string sProjectDetail, string sProjectJob, string sProjectURL, string sProjectTime)
         {
             bool status = false;
             db = new tnguyenResumeEntities();
@@ -82,7 +82,7 @@ namespace tnguyen_Resume.Controllers
             if (pj == null)
             {
                 //Add new item
-                db.Projects.Add(new Project() { ProjectTitle = sProjectTitle, ProjectInfo = sProjectInfo, ProjectDetail = sProjectDetail, ProjectJob = sProjectJob, ProjectTime = dtProjectTime, ProjectURL = sProjectURL, ProjectImage = sProjectImage, ID_User = 1 });
+                db.Projects.Add(new Project() { ProjectTitle = sProjectTitle, ProjectInfo = sProjectInfo, ProjectDetail = sProjectDetail, ProjectJob = sProjectJob, ProjectTime = dtProjectTime, ProjectURL = sProjectURL, ProjectImage = sProjectImage, ID_User = null });
                 db.SaveChanges();
                 status = true;
             }

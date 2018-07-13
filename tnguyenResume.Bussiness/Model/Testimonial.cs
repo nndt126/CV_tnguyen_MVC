@@ -8,7 +8,7 @@ namespace tnguyenResume.Bussiness.Model
 
     public partial class Testimonial
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [StringLength(500)]
         public string TestimonialsInfo { get; set; }
@@ -16,8 +16,6 @@ namespace tnguyenResume.Bussiness.Model
         [StringLength(500)]
         public string TestimonialsAuthor { get; set; }
 
-        public int? ID_User { get; set; }
-
-        public virtual Information Information { get; set; }
+        public Guid? ID_User { get; set; }
     }
 }

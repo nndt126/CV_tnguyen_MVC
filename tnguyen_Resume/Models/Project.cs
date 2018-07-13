@@ -14,7 +14,7 @@ namespace tnguyen_Resume.Models
     
     public partial class Project
     {
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string ProjectImage { get; set; }
         public string ProjectTitle { get; set; }
         public string ProjectInfo { get; set; }
@@ -22,8 +22,6 @@ namespace tnguyen_Resume.Models
         public string ProjectJob { get; set; }
         public string ProjectURL { get; set; }
         public Nullable<System.DateTime> ProjectTime { get; set; }
-        public Nullable<int> ID_User { get; set; }
-    
-        public virtual Information Information { get; set; }
+        public Nullable<System.Guid> ID_User { get; set; }
     }
 }

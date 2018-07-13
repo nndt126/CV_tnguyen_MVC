@@ -14,11 +14,9 @@ namespace tnguyen_Resume.Models
     
     public partial class Testimonial
     {
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string TestimonialsInfo { get; set; }
         public string TestimonialsAuthor { get; set; }
-        public Nullable<int> ID_User { get; set; }
-    
-        public virtual Information Information { get; set; }
+        public Nullable<System.Guid> ID_User { get; set; }
     }
 }

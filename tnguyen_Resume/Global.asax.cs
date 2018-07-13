@@ -32,7 +32,7 @@ namespace tnguyen_Resume
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            builder.RegisterType<tnguyenResumeDbContext>().As<ItnguyenResumeDbContext>();
+            //builder.RegisterType<tnguyenResumeDbContext>().As<ItnguyenResumeDbContext>();
             builder.RegisterType<WorkDAL>().As<IWorkDAL>();
 
             var container = builder.Build();

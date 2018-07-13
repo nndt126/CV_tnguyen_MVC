@@ -14,11 +14,9 @@ namespace tnguyen_Resume.Models
     
     public partial class Account
     {
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-    
-        public virtual Information Information { get; set; }
     }
 }

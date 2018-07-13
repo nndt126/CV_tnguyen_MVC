@@ -14,13 +14,11 @@ namespace tnguyen_Resume.Models
     
     public partial class Education
     {
-        public int ID { get; set; }
+        public System.Guid ID { get; set; }
         public string EducationTitle { get; set; }
         public string EducationInfo { get; set; }
         public Nullable<System.DateTime> EducationDate { get; set; }
         public string EducationDetail { get; set; }
-        public Nullable<int> ID_User { get; set; }
-    
-        public virtual Information Information { get; set; }
+        public Nullable<System.Guid> ID_User { get; set; }
     }
 }

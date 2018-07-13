@@ -9,7 +9,7 @@ namespace tnguyenResume.Bussiness.Model
     [Table("Education")]
     public partial class Education
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [StringLength(500)]
         public string EducationTitle { get; set; }
@@ -23,8 +23,6 @@ namespace tnguyenResume.Bussiness.Model
         [Column(TypeName = "ntext")]
         public string EducationDetail { get; set; }
 
-        public int? ID_User { get; set; }
-
-        public virtual Information Information { get; set; }
+        public Guid? ID_User { get; set; }
     }
 }

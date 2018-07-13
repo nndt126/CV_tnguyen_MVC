@@ -28,16 +28,16 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult EducationPartial()
         {
-            //Lấy ra Ma User đầu tiên trong csdl
-            int id_User = int.Parse(db.Educations.ToList().ElementAt(0).ID_User.ToString());
-            //int id_User = 1;
-            var edu = db.Educations.Where(t => t.ID_User == id_User).OrderBy(t => t.EducationDate.Value.Year).ToList();
-            return PartialView(edu);
+            ////Lấy ra Ma User đầu tiên trong csdl
+            //Guid id_User = db.Educations.ToList().ElementAt(0).ID_User ?? Guid.Empty;
+            ////int id_User = 1;
+            //var edu = db.Educations.Where(t => t.ID_User == id_User).OrderBy(t => t.EducationDate.Value.Year).ToList();
+            return PartialView();
         }
 
         public PartialViewResult WorkPartial()
         {
-            var model = _iWorkDAL.GetAllWorks();
+            var model = _iWorkDAL.GetAllWorks().ToList();
             return PartialView(model);
         }
 
@@ -52,20 +52,20 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult SkillPartial()
         {
-            //Lấy ra Ma User đầu tiên trong csdl
-            int id_User = int.Parse(db.Skills.ToList().ElementAt(0).ID_User.ToString());
-            //int id_User = 1;
-            var skill = db.Skills.Where(t => t.ID_User == id_User).ToList();
-            return PartialView(skill);
+            ////Lấy ra Ma User đầu tiên trong csdl
+            //Guid id_User = db.Skills.ToList().ElementAt(0).ID_User ?? Guid.Empty;
+            ////int id_User = 1;
+            //var skill = db.Skills.Where(t => t.ID_User == id_User).ToList();
+            return PartialView();
         }
 
         public PartialViewResult TestimonialPartial()
         {
-            //Lấy ra Ma User đầu tiên trong csdl
-            int id_User = int.Parse(db.Testimonials.ToList().ElementAt(0).ID_User.ToString());
-            //int id_User = 1;
-            var tm = db.Testimonials.Where(t => t.ID_User == id_User).Take(3).ToList();
-            return PartialView(tm);
+            ////Lấy ra Ma User đầu tiên trong csdl
+            //Guid id_User = db.Testimonials.ToList().ElementAt(0).ID_User ?? Guid.Empty;
+            ////int id_User = 1;
+            //var tm = db.Testimonials.Where(t => t.ID_User == id_User).Take(3).ToList();
+            return PartialView();
         }
 
     }

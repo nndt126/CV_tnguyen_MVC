@@ -23,8 +23,8 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult InformationPartial()
         {
-            var info = db.Information.FirstOrDefault();
-            return PartialView(info);
+            //var info = db.Information.FirstOrDefault();
+            return PartialView();
         }
 
         [HttpGet]
@@ -61,11 +61,11 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult ProjectPartialFooter()
         {
-            //Lấy ra Ma User đầu tiên trong csdl
-            int id_User = int.Parse(db.Projects.ToList().ElementAt(0).ID_User.ToString());
-            //int id_User = 1;
-            var pj = db.Projects.Where(t => t.ID_User == id_User).OrderByDescending(t => t.ProjectTime).Take(2).ToList();
-            return PartialView(pj);
+            ////Lấy ra Ma User đầu tiên trong csdl
+            //Guid id_User = db.Projects.ToList().ElementAt(0).ID_User ?? Guid.Empty;
+            ////int id_User = 1;
+            //var pj = db.Projects.Where(t => t.ID_User == id_User).OrderByDescending(t => t.ProjectTime).Take(2).ToList();
+            return PartialView();
         }
 
     }

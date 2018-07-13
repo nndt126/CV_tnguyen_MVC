@@ -271,3 +271,46 @@ D:\Code-AvTech\CV tnguyen MVC Angular\tnguyen_Resume\bin\System.Web.Http.WebHost
 D:\Code-AvTech\CV tnguyen MVC Angular\tnguyen_Resume\obj\Debug\tnguyen_Resume.csprojResolveAssemblyReference.cache
 D:\Code-AvTech\CV tnguyen MVC Angular\tnguyen_Resume\obj\Debug\tnguyen_Resume.dll
 D:\Code-AvTech\CV tnguyen MVC Angular\tnguyen_Resume\obj\Debug\tnguyen_Resume.pdb
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\tnguyen_Resume.dll.config
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\tnguyen_Resume.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\tnguyen_Resume.pdb
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Antlr3.Runtime.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Autofac.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Autofac.Integration.Mvc.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\EntityFramework.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\EntityFramework.SqlServer.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Facebook.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Microsoft.Web.Infrastructure.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Newtonsoft.Json.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Net.Http.Formatting.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Helpers.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Http.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Http.WebHost.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Mvc.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Optimization.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Providers.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Razor.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.WebPages.Deployment.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.WebPages.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.WebPages.Razor.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\tnguyenResume.Bussiness.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\WebGrease.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\tnguyenResume.Bussiness.pdb
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Autofac.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Autofac.Integration.Mvc.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\EntityFramework.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\EntityFramework.SqlServer.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Facebook.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Helpers.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Mvc.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Razor.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.WebPages.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.WebPages.Deployment.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.WebPages.Razor.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\Newtonsoft.Json.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Net.Http.Formatting.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Http.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\bin\System.Web.Http.WebHost.xml
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\obj\Debug\tnguyen_Resume.csprojResolveAssemblyReference.cache
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\obj\Debug\tnguyen_Resume.dll
+E:\Code\CV_tnguyen_MVC\tnguyen_Resume\obj\Debug\tnguyen_Resume.pdb

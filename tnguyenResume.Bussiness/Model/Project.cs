@@ -9,7 +9,7 @@ namespace tnguyenResume.Bussiness.Model
     [Table("Project")]
     public partial class Project
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
 
         [StringLength(500)]
         public string ProjectImage { get; set; }
@@ -32,8 +32,6 @@ namespace tnguyenResume.Bussiness.Model
         [Column(TypeName = "date")]
         public DateTime? ProjectTime { get; set; }
 
-        public int? ID_User { get; set; }
-
-        public virtual Information Information { get; set; }
+        public Guid? ID_User { get; set; }
     }
 }

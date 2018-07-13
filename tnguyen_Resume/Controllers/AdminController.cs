@@ -46,7 +46,7 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetInforByID(int Id)
+        public JsonResult GetInforByID(Guid Id)
         {
             db = new tnguyenResumeEntities();
             var jSonWork = db.Information.Where(n => n.ID == Id).ToList();
@@ -65,7 +65,7 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditInfor(int sID, string sFullName, string sName, string sPhone, string sAddress, string sCity, string sEmail, string sAbout, string sImage )
+        public JsonResult EditInfor(Guid sID, string sFullName, string sName, string sPhone, string sAddress, string sCity, string sEmail, string sAbout, string sImage )
         {
             bool status = false;
             db = new tnguyenResumeEntities();
@@ -152,7 +152,7 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetbyID(int Id)
+        public JsonResult GetbyID(Guid Id)
         {
             db = new tnguyenResumeEntities();
             var jSonWork = db.Works.Where(n=>n.ID == Id).ToList();
@@ -167,7 +167,7 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddWork(int sID, string sWorksTitle,string sWorksInfo,string sWorksDetail, string sWorkDate)
+        public JsonResult AddWork(Guid sID, string sWorksTitle,string sWorksInfo,string sWorksDetail, string sWorkDate)
         {
             bool status = false;
             db = new tnguyenResumeEntities();
@@ -179,7 +179,7 @@ namespace tnguyen_Resume.Controllers
             {
                 //Add new item
                 //DateTime dtWorkDate = DateTime.ParseExact(sDate, "MM-dd-yyyy", null);
-                db.Works.Add(new Work() { WorksTitle = sWorksTitle, WorksInfo = sWorksInfo, WorksDetail = sWorksDetail, WorksDate = dtWorkDate, ID_User = 1 });
+                db.Works.Add(new Work() { WorksTitle = sWorksTitle, WorksInfo = sWorksInfo, WorksDetail = sWorksDetail, WorksDate = dtWorkDate, ID_User = null });
                 db.SaveChanges();
                 status = true;
             }
@@ -217,7 +217,7 @@ namespace tnguyen_Resume.Controllers
         #region Get/Add/Edit/Delete Education MVC
         //Chỉnh sửa sản phẩm
         [HttpGet]
-        public ActionResult EditInformation(int ID)
+        public ActionResult EditInformation(Guid ID)
         {
             Information edu = db.Information.SingleOrDefault(n => n.ID == ID);
             if (edu == null)
@@ -237,7 +237,7 @@ namespace tnguyen_Resume.Controllers
 
         //Chỉnh sửa sản phẩm
         [HttpGet]
-        public ActionResult EditEducations(int ID)
+        public ActionResult EditEducations(Guid ID)
         {
             Education edu = db.Educations.SingleOrDefault(n => n.ID == ID);
             if (edu == null)
@@ -271,7 +271,7 @@ namespace tnguyen_Resume.Controllers
 
         //Xóa sản phẩm
         [HttpGet]
-        public ActionResult Xoa(int ID)
+        public ActionResult Xoa(Guid ID)
         {
             //Lấy ra đối tượng sách theo mã 
             Education edu = db.Educations.SingleOrDefault(n => n.ID == ID);
@@ -285,7 +285,7 @@ namespace tnguyen_Resume.Controllers
         }
         [HttpPost, ActionName("Xoa")]
 
-        public ActionResult XacNhanXoa(int ID)
+        public ActionResult XacNhanXoa(Guid ID)
         {
             Education sach = db.Educations.SingleOrDefault(n => n.ID == ID);
             if (sach == null)

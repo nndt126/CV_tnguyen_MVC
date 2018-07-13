@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Role" Type="nvarchar" MaxLength="50" />
@@ -13,12 +13,12 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="EducationTitle" Type="nvarchar" MaxLength="500" />
     <Property Name="EducationInfo" Type="ntext" />
     <Property Name="EducationDate" Type="date" />
     <Property Name="EducationDetail" Type="ntext" />
-    <Property Name="ID_User" Type="int" />
+    <Property Name="ID_User" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="EmailTnguyen">
     <Key>
@@ -34,7 +34,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="500" />
     <Property Name="Name" Type="nvarchar" MaxLength="500" />
     <Property Name="Phone" Type="nvarchar" MaxLength="500" />
@@ -48,7 +48,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ProjectImage" Type="nvarchar" MaxLength="500" />
     <Property Name="ProjectTitle" Type="nvarchar" MaxLength="200" />
     <Property Name="ProjectInfo" Type="nvarchar" MaxLength="200" />
@@ -56,140 +56,37 @@
     <Property Name="ProjectJob" Type="nvarchar" MaxLength="200" />
     <Property Name="ProjectURL" Type="nvarchar" MaxLength="500" />
     <Property Name="ProjectTime" Type="date" />
-    <Property Name="ID_User" Type="int" />
+    <Property Name="ID_User" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Skills">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="SkillsTitle" Type="ntext" />
     <Property Name="SkillValue" Type="nvarchar" MaxLength="50" />
-    <Property Name="ID_User" Type="int" />
+    <Property Name="ID_User" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Testimonials">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="TestimonialsInfo" Type="nvarchar" MaxLength="500" />
     <Property Name="TestimonialsAuthor" Type="nvarchar" MaxLength="500" />
-    <Property Name="ID_User" Type="int" />
+    <Property Name="ID_User" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Works">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="WorksTitle" Type="nvarchar" MaxLength="500" />
     <Property Name="WorksInfo" Type="ntext" />
     <Property Name="WorksDate" Type="date" />
     <Property Name="WorksDetail" Type="ntext" />
-    <Property Name="ID_User" Type="int" />
+    <Property Name="ID_User" Type="uniqueidentifier" />
   </EntityType>
-  <Association Name="FK_Account_Information">
-    <End Role="Information" Type="Self.Information" Multiplicity="1" />
-    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Information">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Account">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Education_Information">
-    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
-    <End Role="Education" Type="Self.Education" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Information">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Education">
-        <PropertyRef Name="ID_User" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Project_Information">
-    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
-    <End Role="Project" Type="Self.Project" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Information">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Project">
-        <PropertyRef Name="ID_User" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Skills_Information">
-    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
-    <End Role="Skills" Type="Self.Skills" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Information">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Skills">
-        <PropertyRef Name="ID_User" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Testimonials_Information">
-    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
-    <End Role="Testimonials" Type="Self.Testimonials" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Information">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Testimonials">
-        <PropertyRef Name="ID_User" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Works_Information">
-    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
-    <End Role="Works" Type="Self.Works" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Information">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Works">
-        <PropertyRef Name="ID_User" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="tnguyenResumeModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -199,29 +96,5 @@
     <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Testimonials" EntityType="Self.Testimonials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Account_Information" Association="Self.FK_Account_Information">
-      <End Role="Information" EntitySet="Information" />
-      <End Role="Account" EntitySet="Account" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Education_Information" Association="Self.FK_Education_Information">
-      <End Role="Information" EntitySet="Information" />
-      <End Role="Education" EntitySet="Education" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Project_Information" Association="Self.FK_Project_Information">
-      <End Role="Information" EntitySet="Information" />
-      <End Role="Project" EntitySet="Project" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Skills_Information" Association="Self.FK_Skills_Information">
-      <End Role="Information" EntitySet="Information" />
-      <End Role="Skills" EntitySet="Skills" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Testimonials_Information" Association="Self.FK_Testimonials_Information">
-      <End Role="Information" EntitySet="Information" />
-      <End Role="Testimonials" EntitySet="Testimonials" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Works_Information" Association="Self.FK_Works_Information">
-      <End Role="Information" EntitySet="Information" />
-      <End Role="Works" EntitySet="Works" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>
