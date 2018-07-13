@@ -8,7 +8,7 @@ using tnguyenResume.Bussiness.Model;
 
 namespace tnguyenResume.Bussiness.DAL
 {
-    public class WorkDAL
+    public class WorkDAL : IWorkDAL
     {
         private readonly ItnguyenResumeDbContext _itnguyenResumeDbContext;
 
