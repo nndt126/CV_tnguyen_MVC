@@ -1,0 +1,55 @@
+﻿@model tnguyen_Resume.Models.Education
+
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/Layout/_AdminLayOut.cshtml";
+}
+
+<h2>Xoa</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Education</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EducationTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EducationTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EducationInfo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EducationInfo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EducationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EducationDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EducationDetail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EducationDetail)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ID_User)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ID_User)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

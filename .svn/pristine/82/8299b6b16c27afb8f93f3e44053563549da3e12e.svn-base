@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2506a2fb89ca42ed9c5f012c7ddae858" Name="Diagram1">
+        <EntityTypeShape EntityType="tnguyenResumeModel.Education" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.Information" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.Project" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.Skill" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.Testimonial" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.Work" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="tnguyenResumeModel.FK_Education_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="tnguyenResumeModel.FK_Project_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="tnguyenResumeModel.FK_Skills_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="tnguyenResumeModel.FK_Testimonials_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="tnguyenResumeModel.FK_Works_Information" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.EmailTnguyen" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.Account" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="tnguyenResumeModel.sysdiagram" Width="1.5" PointX="5.375" PointY="3.75" />
+        <AssociationConnector Association="tnguyenResumeModel.FK_Account_Information" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

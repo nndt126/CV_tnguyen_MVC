@@ -1,0 +1,228 @@
+﻿@using tnguyen_Resume.Models;
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!-->
+<html class="no-js" lang="en">
+ <!--<![endif]-->
+<head>
+
+    <!--- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="~/Content/css/default.css">
+    <link rel="stylesheet" href="~/Content/css/layout.css">
+    <link rel="stylesheet" href="~/Content/css/media-queries.css">
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+
+    <!-- Script
+    ================================================== -->
+    <script src="~/Content/js/modernizr.js"></script>
+
+    <!-- Favicons
+     ================================================== -->
+    <link rel="shortcut icon" href="~/Content/images/favicon.png">
+
+</head>
+
+<body>
+    @RenderBody()
+    <!-- Header
+    ================================================== -->
+    <header id="home">
+
+        <nav id="nav-wrap">
+
+            <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+            <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+            <ul id="nav" class="nav">
+                <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
+                <li><a class="smoothscroll" href="#about">About</a></li>
+                <li><a class="smoothscroll" href="#resume">Resume</a></li>
+                <li><a class="smoothscroll" href="#project">Project</a></li>
+                <li><a class="smoothscroll" href="#testimonials">Testimonials</a></li>
+                <li><a class="smoothscroll" href="#contact">Contact</a></li>
+                @{
+                    var user = Session["username"];
+                }
+                @if (user != null)
+                {
+                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    <li>@Html.ActionLink("Welcome " + user, "Index", "Admin",null, new { @style = "font-family: 'Exo', sans-serif; color: #5379fa !important" })</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                }
+            </ul> <!-- end #nav -->
+        </nav> <!-- end #nav-wrap -->
+
+        <div class="row banner">
+            <div class="banner-text">
+                <h1 class="responsive-headline">I'm Thành Nguyễn.</h1>
+                <h3>
+                    Developer BackEnd <span>ASP.Net </span> - <span>SharePoint</span> and <span>Winform. </span><br /> Let's <a class="smoothscroll" href="#about">start scrolling</a>
+                    and know <a class="smoothscroll" href="#about">about me</a>.
+                </h3>
+                <hr />
+                <ul class="social">
+                    <li><a href="https://www.facebook.com/LipMupMap"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/thanh-nguyen-3591"><i class="fa fa-linkedin-square"></i></a></li>
+                    <li><a href="mailto:tnguyen3591@gmail.com"><i class="fa fa-envelope"></i></a></li>
+                    <li><a href="skype:lipnguyen"><i class="fa fa-skype"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="scrolldown">
+            <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
+        </p>
+
+    </header> <!-- Header End -->
+    <!-- About Section
+    ================================================== -->
+    <section id="about">
+        @Html.Action("InformationPartial", "Home")
+    </section> <!-- About Section End-->
+    <!-- Resume Section
+    ================================================== -->
+    <section id="resume">
+        <!-- Education
+        ----------------------------------------------- -->
+        @Html.Action("EducationPartial", "Resume")
+        <!-- End Education -->
+        <!-- Work
+        ----------------------------------------------- -->
+        @Html.Action("WorkPartial", "Resume")
+         <!-- End Work -->
+        <!-- Skills
+        ----------------------------------------------- -->
+        @Html.Action("SkillPartial", "Resume")
+
+    </section> <!-- Resume Section End-->
+    <!-- project Section
+    ================================================== -->
+    <section id="project">
+        @Html.Action("ProjectPartial", "Project")
+    </section> <!-- project Section End-->
+    <!-- Testimonials Section
+    ================================================== -->
+    <section id="testimonials">
+        @Html.Action("TestimonialPartial", "Resume")
+    </section> <!-- Testimonials Section End-->
+    <!-- Contact Section
+    ================================================== -->
+    <section id="contact">
+
+        <div class="row section-head">
+            <div class="two columns header-col">
+                <h1><span>Get In Touch.</span></h1>
+            </div>
+
+            <div class="ten columns">
+                <p class="lead">
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+           @Html.Action("Contact", "Home")
+
+            <aside class="four columns footer-widgets">
+                <div class="widget widget_contact">
+                    <h4>Address and Phone</h4>
+                    <p class="address">
+                        Thành Nguyễn<br>
+                        62/16 Phú Thọ Hòa <br>
+                        Quận Tân Phú, HCMC<br>
+                        <span>(84) 909 921 135</span>
+                    </p>
+                </div>
+                @Html.Action("ProjectPartialFooter", "Home")
+            </aside>
+        </div>
+    </section> <!-- Contact Section End-->
+    <!-- footer
+    ================================================== -->
+    <footer>
+
+        <div class="row">
+
+            <div class="twelve columns">
+
+                <ul class="social-links">
+                    <li><a href="https://www.facebook.com/LipMupMap"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/thanh-nguyen-3591"><i class="fa fa-linkedin-square"></i></a></li>
+                    <li><a href="mailto:tnguyen3591@gmail.com"><i class="fa fa-envelope"></i></a></li>
+                    <li><a href="skype:lipnguyen"><i class="fa fa-skype"></i></a></li>
+                </ul>
+
+                <ul class="copyright">
+                    <li>&copy; Copyright @DateTime.Now.Year L.I.P</li>
+                    <li>Design by <a title="Styleshout" href="https://www.facebook.com/LipMupMap">Thành Nguyễn</a></li>
+                </ul>
+
+            </div>
+
+            <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
+
+        </div>
+
+    </footer> <!-- Footer End-->
+    <!-- Java Script
+    ================================================== -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+    <script type="text/javascript" src="~/Content/js/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="~/Content/js/jquery.flexslider.js"></script>
+    <script src="~/Content/js/waypoints.js"></script>
+    <script src="~/Content/js/jquery.fittext.js"></script>
+    <script src="~/Content/js/magnific-popup.js"></script>
+    <script src="~/Content/js/init.js"></script>
+    <script src="http://sibeeshpassion.com/content/scripts/jquery-1.11.1.min.js"></script>
+
+    @*<script>
+        document.onkeypress = function (event) {
+            event = (event || window.event);
+            if (event.keyCode == 123) {
+                return false;
+            }
+        }
+        document.onmousedown = function (event) {
+            event = (event || window.event);
+            if (event.keyCode == 123) {
+                return false;
+            }
+        }
+        document.onkeydown = function (event) {
+            event = (event || window.event);
+            if (event.keyCode == 123) {
+                return false;
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on("contextmenu", function (e) {
+                alert("Đừng mơ F12");
+                return false;
+            });
+        });
+    </script>*@
+
+</body>
+
+</html>

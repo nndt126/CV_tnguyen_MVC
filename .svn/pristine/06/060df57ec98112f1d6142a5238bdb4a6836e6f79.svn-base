@@ -1,0 +1,47 @@
+﻿@using tnguyen_Resume.Models;
+@model List<Skill>
+
+
+
+<div class="row skill">
+    <div class="three columns header-col">
+        <h1><span>Skills</span></h1>
+    </div>
+    <div class="nine columns main-col">
+        <div class="bars">
+            <ul class="skills">
+                @{
+                    foreach (var item in Model)
+                    {
+                        if(@item.SkillsTitle.Contains(" "))
+                        {
+                            int i = @item.SkillsTitle.IndexOf(" ");
+                             <li>
+                                 <span class="bar-expand @item.SkillsTitle.Remove(i)" style="width:@item.SkillValue; margin-bottom: 25px; -moz-animation: @item.SkillsTitle.Remove(i) 2s ease; -webkit-animation: @item.SkillsTitle.Remove(i) 2s ease;">
+                                     @item.SkillValue
+                                 </span>
+                                <em>@item.SkillsTitle </em>
+                             </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <span class="bar-expand @item.SkillsTitle" style="width:@item.SkillValue; margin-bottom: 25px; -moz-animation: @item.SkillsTitle 2s ease; -webkit-animation: @item.SkillsTitle 2s ease;">
+                                    @item.SkillValue
+                                </span>
+                                <em>@item.SkillsTitle</em>
+                            </li>
+                        }
+                    }
+                }
+
+                @*<li><span class="bar-expand SharePoint">75/100</span><em>Share Point 2010</em></li>
+                    <li><span class="bar-expand CSS">70/100</span><em>HTML5 & CSS3</em></li>
+                    <li><span class="bar-expand SQL">65/100</span><em>SQL Server</em></li>
+                    <li><span class="bar-expand English">55/100</span><em>English</em></li>
+                    <li><span class="bar-expand WindowsPhone">50/100</span><em>Windows Phone App</em></li>*@
+            </ul>
+        </div><!-- end skill-bars -->
+    </div> <!-- main-col end -->
+
+</div> <!-- End skills -->

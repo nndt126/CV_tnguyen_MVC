@@ -1,0 +1,133 @@
+﻿@model tnguyen_Resume.Models.Education
+
+@{
+    ViewBag.Title = "EditEducations";
+    Layout = "~/Views/Layout/_AdminLayOut.cshtml";
+}
+
+<div id="form_sample_3" class="form-horizontal">
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+            <div class="col-md-12">
+                <!-- BEGIN VALIDATION STATES-->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>Edit Education
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config">
+                            </a>
+                            <a href="@Url.Action("EducationAdmin","Admin")" class="reload">
+                            </a>
+                            <a href="javascript:;" class="remove">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+
+                        <div class="form-body">
+                            <h3 class="form-section">Advance validation. <small>Custom radio buttons, checkboxes and Select2 dropdowns</small></h3>
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                You have some form errors. Please check below.
+                            </div>
+                            <div class="alert alert-success display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Your form validation is successful!
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    ID <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="ID" readonly="" value="@Model.ID" />
+                                    @*@Html.DisplayFor(model => model.ID, new { @class = "form-control" })*@
+                                    @Html.Hidden("ID", Model.ID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Tiêu đề <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.EducationTitle, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Thông tin <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.EducationInfo, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Chi tiết <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    @Html.TextAreaFor(model => model.EducationDetail, new { @class = "form-control" })
+                                </div>
+                            </div>   
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EducationDate, new { @class = "control-label col-md-3" })
+                                @*<label class="">Ngày cập nhật</label>*@
+                                <div class="col-md-4">
+                                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                        <input type="text" class="form-control" name="EducationDate" id="EducationDate" value="@Model.EducationDate" />
+                                            @*@Html.EditorFor(model => model.EducationDate, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EducationDate)*@
+                                            @*<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>*@
+                                    </div>
+                                    <!-- /input-group -->
+                                    @*<span class="help-block">
+                                        select a date
+                                    </span>*@
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <input type="submit" value="Lưu" class="btn green" />
+                                    <a class="btn default" href="@Url.Action("EducationAdmin","Admin")">Cancel</a>
+                                    @*<button type="button" class="btn default"> @Html.ActionLink("Cancel", "EducationAdmin")</button>*@
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END FORM-->
+                    </div>
+                    <!-- END VALIDATION STATES-->
+                </div>
+            </div>
+}
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+<!-- Code to wire up your DatePicker -->
+@*<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>*@

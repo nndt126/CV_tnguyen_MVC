@@ -1,0 +1,25 @@
+﻿@using tnguyen_Resume.Models;
+@model List<Work>
+
+
+<div class="row work">
+    <div class="three columns header-col">
+        <h1><span>Work</span></h1>
+    </div>
+    <div class="nine columns main-col">
+        @{
+            foreach (var item in Model)
+            {
+                <div class="row item">
+                    <div class="twelve columns">
+                        <h3>@item.WorksTitle</h3>
+                        <p class="info"> @item.WorksInfo <span>&bull;</span> <em class="date">@item.WorksDate.Value.Year</em></p>
+                        <p>
+                            @item.WorksDetail
+                        </p>
+                    </div>
+                </div> <!-- item end -->
+            }
+        }
+    </div> <!-- main-col end -->
+</div>

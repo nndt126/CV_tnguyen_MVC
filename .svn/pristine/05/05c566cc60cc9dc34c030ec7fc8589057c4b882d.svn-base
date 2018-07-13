@@ -1,0 +1,63 @@
+﻿@using tnguyen_Resume.Models;
+@model List<Project>
+
+
+<div class="row">
+    <div class="twelve columns collapsed">
+        <h1>Check Out Some of My Works.</h1>
+
+        <!-- project-wrapper -->
+        <div id="project-wrapper" class="bgrid-quarters s-bgrid-thirds cf">
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="columns project-item">
+                        <div class="item-wrap">
+                            <a href="#@item.ID" title="">
+                                <img class ="project" alt="" src="@Url.Content("~/Content/images/portfolio/" + @item.ProjectImage)" />
+                                <div class="overlay">
+                                    <div class="project-item-meta">
+                                        <h5>@item.ProjectTitle</h5>
+                                        <p>@item.ProjectInfo</p>
+                                    </div>
+                                </div>
+                                <div class="link-icon"><i class="icon-plus"></i></div>
+                            </a>
+                        </div>
+                    </div> <!-- item end -->
+                }
+            }
+
+        </div> <!-- project-wrapper end -->
+    </div> <!-- twelve columns end -->
+    <!-- Modal Popup
+     --------------------------------------------------------------- -->
+    @{
+        foreach (var item in Model)
+        {
+            <div id="@item.ID" class="popup-modal mfp-hide">
+                <img class="scale-with-grid" src="@Url.Content("~/Content/images/portfolio/" + @item.ProjectImage)" alt="" />
+                <div class="description-box">
+                    <h4>@item.ProjectTitle</h4>
+                    <p>@item.ProjectDetail</p>
+                    <span class="categories"><i class="fa fa-tag"></i>@item.ProjectJob</span>
+                </div>
+             
+                <div class="link-box">
+                   @if (@item.ProjectURL == null)
+                   {
+                       <a class="popup-modal-dismiss">Details</a>
+                        <a class="popup-modal-dismiss">Close</a> 
+                   }
+                          
+                   else
+                   {
+                       <a href="@item.ProjectURL">Details</a>
+                       <a class="popup-modal-dismiss">Close</a>   
+                   }
+                    
+                </div>
+            </div><!-- modal-01 End -->
+        }
+    }
+</div> <!-- row End -->

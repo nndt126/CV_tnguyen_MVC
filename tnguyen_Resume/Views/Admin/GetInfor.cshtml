@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/App.js"></script>
+    <script>
+        myApp = angular.module('myApp', []);
+        myApp.controller('myController', function($scope, $http) {
+            $http.get('/Admin/GetInformations').success(function (result) {
+                $scope.Informations = result;
+            });
+        });
+
+    </script>
+</head>
+<body ng-app="myApp">
+    <h2>GetInfor</h2>
+    <div ng-controller="myController">
+        <table>
+            <tr ng-repeat="data in Informations">
+                <td>{{data.FullName}}</td>
+                <td>{{data.About}}</td>
+            </tr>
+        </table>
+        
+    </div>
+</body>
+</html>

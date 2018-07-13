@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="tnguyenResumeModelStoreContainer" CdmEntityContainer="tnguyenResumeEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Educations">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Education">
+        <MappingFragment StoreEntitySet="Education">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EducationTitle" ColumnName="EducationTitle" />
+          <ScalarProperty Name="EducationInfo" ColumnName="EducationInfo" />
+          <ScalarProperty Name="EducationDate" ColumnName="EducationDate" />
+          <ScalarProperty Name="EducationDetail" ColumnName="EducationDetail" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailTnguyens">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.EmailTnguyen">
+        <MappingFragment StoreEntitySet="EmailTnguyen">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Information">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Information">
+        <MappingFragment StoreEntitySet="Information">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="About" ColumnName="About" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectImage" ColumnName="ProjectImage" />
+          <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+          <ScalarProperty Name="ProjectInfo" ColumnName="ProjectInfo" />
+          <ScalarProperty Name="ProjectDetail" ColumnName="ProjectDetail" />
+          <ScalarProperty Name="ProjectJob" ColumnName="ProjectJob" />
+          <ScalarProperty Name="ProjectURL" ColumnName="ProjectURL" />
+          <ScalarProperty Name="ProjectTime" ColumnName="ProjectTime" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Skills">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Skill">
+        <MappingFragment StoreEntitySet="Skills">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SkillsTitle" ColumnName="SkillsTitle" />
+          <ScalarProperty Name="SkillValue" ColumnName="SkillValue" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Testimonials">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Testimonial">
+        <MappingFragment StoreEntitySet="Testimonials">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TestimonialsInfo" ColumnName="TestimonialsInfo" />
+          <ScalarProperty Name="TestimonialsAuthor" ColumnName="TestimonialsAuthor" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="tnguyenResumeModel.Work">
+        <MappingFragment StoreEntitySet="Works">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WorksTitle" ColumnName="WorksTitle" />
+          <ScalarProperty Name="WorksInfo" ColumnName="WorksInfo" />
+          <ScalarProperty Name="WorksDate" ColumnName="WorksDate" />
+          <ScalarProperty Name="WorksDetail" ColumnName="WorksDetail" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="tnguyenResumeModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="tnguyenResumeModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="tnguyenResumeModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="tnguyenResumeModel.Store.sp_helpdiagramdefinition" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="tnguyenResumeModel.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="tnguyenResumeModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="tnguyenResumeModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

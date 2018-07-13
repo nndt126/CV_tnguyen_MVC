@@ -1,0 +1,15 @@
+﻿
+<h1 class="responsive-headline">Thank for contact me. I will reply ASAP</h1>
+
+<div id="message-success">
+    <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+</div>
+
+
+<meta http-equiv="Refresh" content="5;URL=@(Url.Action("Index", "Home"))">
+
+<script type="text/javascript">
+    window.setTimeout(function() {
+        window.location.href = '@Url.Action("Index", "Home")';
+    }, 7000);
+</script>

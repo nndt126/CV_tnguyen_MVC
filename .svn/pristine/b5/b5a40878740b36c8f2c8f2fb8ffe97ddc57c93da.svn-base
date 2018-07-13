@@ -1,0 +1,162 @@
+﻿@model tnguyen_Resume.Models.Information
+
+@{
+    ViewBag.Title = "EditInformation";
+    Layout = "~/Views/Layout/_AdminLayOut.cshtml";
+}
+
+<div id="form_sample_3" class="form-horizontal">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Edit Education
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="#portlet-config" data-toggle="modal" class="config">
+                        </a>
+                        <a href="@Url.Action("InformationAdmin","Admin")" class="reload">
+                        </a>
+                        <a href="javascript:;" class="remove">
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+
+                    <div class="form-body">
+                        <h3 class="form-section">Advance validation. <small>Custom radio buttons, checkboxes and Select2 dropdowns</small></h3>
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button>
+                            You have some form errors. Please check below.
+                        </div>
+                        <div class="alert alert-success display-hide">
+                            <button class="close" data-close="alert"></button>
+                            Your form validation is successful!
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                ID <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="ID" readonly="" value="@Model.ID" />
+                                @*@Html.DisplayFor(model => model.ID, new { @class = "form-control" })*@
+                                @Html.Hidden("ID", Model.ID)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Họ tên <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Tên <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Thông tin <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                <input type="file" id="UploadImg" /> <br />
+                                
+                                <button class="btn btn-success" onclick="SaveImage()">Preview</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Thông tin <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                <input type="file" id="UploadImg" /> <br />
+                                <img id="imgPreview" class="img-responsive" height="150" width="150" />
+                                <button class="btn btn-success" onclick="SaveImage()">Preview</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Điện thoại <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Địa chỉ <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Thành phố <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Thông tin <span class="required">*</span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.TextAreaFor(model => model.About, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Lưu" class="btn green" />
+                                <a class="btn default" href="@Url.Action("InformationAdmin","Admin")">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END FORM-->
+                </div>
+                <!-- END VALIDATION STATES-->
+            </div>
+        </div>
+    }
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+<!-- Code to wire up your DatePicker -->
+@*<script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>*@

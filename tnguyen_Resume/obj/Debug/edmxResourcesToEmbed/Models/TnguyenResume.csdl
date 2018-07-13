@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tnguyenResumeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Information" Relationship="Self.FK_Account_Information" FromRole="Account" ToRole="Information" />
+  </EntityType>
+  <EntityType Name="Education">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EducationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EducationInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EducationDate" Type="DateTime" Precision="0" />
+    <Property Name="EducationDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ID_User" Type="Int32" />
+    <NavigationProperty Name="Information" Relationship="Self.FK_Education_Information" FromRole="Education" ToRole="Information" />
+  </EntityType>
+  <EntityType Name="EmailTnguyen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Information">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Account_Information" FromRole="Information" ToRole="Account" />
+    <NavigationProperty Name="Educations" Relationship="Self.FK_Education_Information" FromRole="Information" ToRole="Education" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Information" FromRole="Information" ToRole="Project" />
+    <NavigationProperty Name="Skills" Relationship="Self.FK_Skills_Information" FromRole="Information" ToRole="Skills" />
+    <NavigationProperty Name="Testimonials" Relationship="Self.FK_Testimonials_Information" FromRole="Information" ToRole="Testimonials" />
+    <NavigationProperty Name="Works" Relationship="Self.FK_Works_Information" FromRole="Information" ToRole="Works" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectInfo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectDetail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectJob" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectURL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectTime" Type="DateTime" Precision="0" />
+    <Property Name="ID_User" Type="Int32" />
+    <NavigationProperty Name="Information" Relationship="Self.FK_Project_Information" FromRole="Project" ToRole="Information" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillsTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SkillValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ID_User" Type="Int32" />
+    <NavigationProperty Name="Information" Relationship="Self.FK_Skills_Information" FromRole="Skills" ToRole="Information" />
+  </EntityType>
+  <EntityType Name="Testimonial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TestimonialsInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TestimonialsAuthor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ID_User" Type="Int32" />
+    <NavigationProperty Name="Information" Relationship="Self.FK_Testimonials_Information" FromRole="Testimonials" ToRole="Information" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorksTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="WorksInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WorksDate" Type="DateTime" Precision="0" />
+    <Property Name="WorksDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ID_User" Type="Int32" />
+    <NavigationProperty Name="Information" Relationship="Self.FK_Works_Information" FromRole="Works" ToRole="Information" />
+  </EntityType>
+  <Association Name="FK_Account_Information">
+    <End Role="Information" Type="Self.Information" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Information">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Education_Information">
+    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
+    <End Role="Education" Type="Self.Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Information">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Information">
+    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Information">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Skills_Information">
+    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
+    <End Role="Skills" Type="Self.Skill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Information">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Skills">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Testimonials_Information">
+    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
+    <End Role="Testimonials" Type="Self.Testimonial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Information">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Testimonials">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Works_Information">
+    <End Role="Information" Type="Self.Information" Multiplicity="0..1" />
+    <End Role="Works" Type="Self.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Information">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Works">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="tnguyenResumeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Educations" EntityType="Self.Education" />
+    <EntitySet Name="EmailTnguyens" EntityType="Self.EmailTnguyen" />
+    <EntitySet Name="Information" EntityType="Self.Information" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="Skills" EntityType="Self.Skill" />
+    <EntitySet Name="Testimonials" EntityType="Self.Testimonial" />
+    <EntitySet Name="Works" EntityType="Self.Work" />
+    <AssociationSet Name="FK_Account_Information" Association="Self.FK_Account_Information">
+      <End Role="Information" EntitySet="Information" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Education_Information" Association="Self.FK_Education_Information">
+      <End Role="Information" EntitySet="Information" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Information" Association="Self.FK_Project_Information">
+      <End Role="Information" EntitySet="Information" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Skills_Information" Association="Self.FK_Skills_Information">
+      <End Role="Information" EntitySet="Information" />
+      <End Role="Skills" EntitySet="Skills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Testimonials_Information" Association="Self.FK_Testimonials_Information">
+      <End Role="Information" EntitySet="Information" />
+      <End Role="Testimonials" EntitySet="Testimonials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Works_Information" Association="Self.FK_Works_Information">
+      <End Role="Information" EntitySet="Information" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+</Schema>

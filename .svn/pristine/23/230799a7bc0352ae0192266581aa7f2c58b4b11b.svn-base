@@ -1,0 +1,105 @@
+﻿@*<div class="eight columns">
+    <!-- form -->
+    <form action="" method="post" id="contactForm" name="contactForm">
+        <fieldset>
+            <div>
+                <label for="contactName">Name <span class="required">*</span></label>
+                <input type="text" value="" size="35" id="contactName" name="contactName">
+            </div>
+
+            <div>
+                <label for="contactEmail">Email <span class="required">*</span></label>
+                <input type="text" value="" size="35" id="contactEmail" name="contactEmail">
+            </div>
+
+            <div>
+                <label for="contactSubject">Subject</label>
+                <input type="text" value="" size="35" id="contactSubject" name="contactSubject">
+            </div>
+
+            <div>
+                <label for="contactMessage">Message <span class="required">*</span></label>
+                <textarea cols="30" rows="15" id="contactMessage" name="contactMessage"></textarea>
+            </div>
+
+            <div>
+                <button class="submit">Submit</button>
+                <span id="image-loader">
+                    <img alt="" src="~/Content/images/loader.gif">
+                </span>
+            </div>
+
+        </fieldset>
+    </form> <!-- Form End -->
+    <!-- contact-warning -->
+    <div id="message-warning"> Error boy</div>
+    <!-- contact-success -->
+    <div id="message-success">
+        <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+    </div>
+
+</div>*@
+
+@model tnguyen_Resume.Models.EmailFormModel
+
+
+<h2>@ViewBag.Title.</h2>
+<div class="eight columns">
+  
+    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstName, new { @class = "required" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FirstName, new { })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Phone, new { @class = "required" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Phone, new { })
+                    @Html.ValidationMessageFor(m => m.Phone)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Subject, new { })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Subject, new { })
+                    @Html.ValidationMessageFor(m => m.Subject)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Message, new { @class = "required" })
+                <div class="col-md-10">
+                    @Html.TextArea("Message", new {@rows = "5" })
+                    @Html.ValidationMessageFor(m => m.Message)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="submit2" value="Send" />
+                <div class="col-md-10">
+                    <span id="image-loader">
+                        <img alt="" src="~/Content/images/loader.gif">
+                    </span>
+                </div>
+                <span id="image-loader">
+                    <img alt="" src="~/Content/images/loader.gif">
+                </span>
+            </div>
+
+        </fieldset>
+    }
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,30 @@
+﻿@using tnguyen_Resume.Models;
+@model List<Project>
+
+<div class="widget widget_tweets">
+    <h4 class="widget-title">Latest Project</h4>
+    <ul id="twitter">
+        @{
+            foreach(var item in Model)
+            {
+                 <li>
+                    <span>
+                        @item.ProjectDetail
+                        <a href="#">
+                            @if (@item.ProjectURL == null)
+                            {
+                                
+                            }
+                            else
+                            {
+                                @item.ProjectURL
+                            }
+                        </a>
+                    </span>
+                    <b><a href="#"> Start: @item.ProjectTime.Value.ToShortDateString() </a></b>
+                </li>
+            }
+        }
+    </ul>
+
+</div>

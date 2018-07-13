@@ -1,0 +1,271 @@
+﻿@model IEnumerable<tnguyen_Resume.Models.Information>
+
+@{
+    ViewBag.Title = "GetLayOutInformation";
+    Layout = "~/Views/Layout/_AdminLayOut.cshtml";
+}
+
+<div class="row" ng-controller="informationController">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Information Admin
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>
+                    <a ng-click="getData()" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="sample_editable_1_filter" class="dataTables_filter form-group">
+                                <label>
+                                    <input type="search" class="form-control input-large input-circle" placeholder="Search by Work Title" aria-controls="sample_editable_1" ng-model="searchWork">
+                                </label>
+                                <button type="submit" class="btn green input-circle"><i class="fa fa-search"></i></button>
+                            </div>
+                            @*<div class="btn-group">
+                                    <button id="sample_editable_1_new" class="btn green" onclick="ShowRow()">
+                                        Add New <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>*@
+                        </div>
+                        <div class="col-md-6">
+                            <input type="hidden" required ng-model="sID" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group pull-right">
+                                <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">
+                                    Tools <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a onClick="$('#sample_editable_1').tableExport({ type: 'png', escape: 'false' });">
+                                            Print as Image
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a onClick="$('#sample_editable_1').tableExport({ type: 'pdf', pdfFontSize: '7', escape: 'false' });">
+                                            Save as PDF
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a onClick="$('#sample_editable_1').tableExport({ type: 'excel', escape: 'false' });">
+                                            Export to Excel
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-12">
+                            <button id="sample_editable_1_new" class="btn green" onclick="ShowRow()">
+                                Add New <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                        <tr class='warning'>
+                            <th ng-click="sort('FullName')">
+                                @Html.DisplayNameFor(model => model.First().FullName)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='FullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Name')">
+                                @Html.DisplayNameFor(model => model.First().Name)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='Name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Image')">
+                                @Html.DisplayNameFor(model => model.First().Image)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='Image'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Phone')">
+                                @Html.DisplayNameFor(model => model.First().Phone)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='Phone'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('Address')">
+                                @Html.DisplayNameFor(model => model.First().Address)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='Address'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('City')">
+                                @Html.DisplayNameFor(model => model.First().City)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='City'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th width="10%" ng-click="sort('Email')">
+                                @Html.DisplayNameFor(model => model.First().Email)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='Email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th ng-click="sort('About')">
+                                @Html.DisplayNameFor(model => model.First().About)
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='About'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </th>
+                            <th>
+                                Edit
+                            </th>
+                            <th>
+                                Delete
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*<tr id="result_tr" style="display:none;">
+                            <td><input type="text" ng-model="sFullName" /></td>
+                            <td><input type="text" ng-model="sName" /></td>
+                            <td class="input-group" >
+                                <input type="file" id="UploadImg" class="fileinput-preview" /> <br />
+                                <img id="imgPreview" class="img-responsive" height="150" width="150" /><br/>
+                                <button class="btn btn-success" onclick="SaveImage()">Save</button>
+                            </td>
+                            <td><input type="text" required ng-model="sEmail" /></td>
+                            <td><textarea class="form-control" required ng-model="sAbout" rows="3"></textarea></td>
+                            <td><button class="btn btn-success" ng-click="addWork()">Save</button></td>
+                            <td><button class="btn btn-primary" onclick="HiddenRow()">Cancel</button></td>
+                        </tr>*@
+                        @*<tr dir-paginate="data in Works | orderBy:sortKey:reverse | filter : searchWork|itemsPerPage:3">*@
+                            <tr ng-repeat="data in Infors">
+                                <td>{{data.FullName}}</td>
+                                <td>{{data.Name}}</td>
+                                <td><img alt="" class="img-responsive" ng-src="~/Content/images/profile/{{data.Image}}" /></td>
+                                <td>{{data.Phone}}</td>
+                                <td>{{data.Address}}</td>
+                                <td>{{data.City}}</td>
+                                <td>{{data.Email}}</td>
+                                <td>{{data.About}}</td>
+                            <td class="text-center"><button class="btn btn-warning" ng-click="getInformationByID(data)">Edit</button></td>
+                            @*<td><a class="edit" href="@Url.Action("EditWorks")">Edit</a></td>*@
+                            <td class="text-center"><button class="btn btn-danger" ng-click="deleteWork(data)">Delete</button></td>
+                            @*<td><a class="delete" href="@Url.Action("Xoa")">Delete</a></td>*@
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+
+    <div id="result_tr" style="display:none;" class="form-horizontal">
+            <div class="col-md-12">
+                <!-- BEGIN VALIDATION STATES-->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>Edit Information
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    ID <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="ID" readonly="" required ng-model="sID" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Họ tên <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="sFullName" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Tên <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="sName" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                   Hình ảnh <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="file" id="UploadImg" class="form-control" /> <br />
+                                    <input type="text" id="txtImg" required ng-model="sImage" class="form-control" />
+                                    <img id="imgPreview" class="img-responsive" height="200" width="200" />
+                                    <button class="btn btn-success" onclick="SaveImage()">Upload Image</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Điện thoại <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" required ng-model="sPhone" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Địa chỉ <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" required ng-model="sAddress" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Thành phố <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" required ng-model="sCity" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Email <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" required ng-model="sEmail" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    Thông tin <span class="required">*</span>
+                                </label>
+                                <div class="col-md-4">
+                                    <textarea class="form-control" required ng-model="sAbout" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button class="btn btn-success" ng-click="editInfor()">Save</button>
+                                    <button class="btn btn-primary" onclick="HiddenRow()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END FORM-->
+                    </div>
+                    <!-- END VALIDATION STATES-->
+                </div>
+            </div>
+    </div>
+
+</div>
