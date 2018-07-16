@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
-using Autofac.Integration;
 using Autofac.Integration.Mvc;
 using tnguyenResume.Bussiness.Model;
 using tnguyenResume.Bussiness.Interface;
 using tnguyenResume.Bussiness.DAL;
+using System.Web.Helpers;
+using System.Security.Claims;
 
 namespace tnguyen_Resume
 {
@@ -28,12 +25,19 @@ namespace tnguyen_Resume
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
 
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            //builder.RegisterType<tnguyenResumeDbContext>().As<ItnguyenResumeDbContext>();
-            builder.RegisterType<WorkDAL>().As<IWorkDAL>();
+            builder.RegisterType<tnguyenResumeDbContext>().As<ItnguyenResumeDbContext>().InstancePerDependency();
+            builder.RegisterType<WorkDAL>().As<IWorkDAL>().InstancePerDependency();
+            builder.RegisterType<EducationDAL>().As<IEducationDAL>().InstancePerDependency();
+            builder.RegisterType<InformationDAL>().As<IinformationDAL>().InstancePerDependency();
+            builder.RegisterType<ProjectDAL>().As<IProjectDAL>().InstancePerDependency();
+            builder.RegisterType<TestimonialDAL>().As<ITestimonialDAL>().InstancePerDependency();
+            builder.RegisterType<SkilDAL>().As<ISkillDAL>().InstancePerDependency();
+            builder.RegisterType<AccountDAL>().As<IAccountDAL>().InstancePerDependency();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -59,7 +59,43 @@
     <Reference Include="Facebook">
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -108,9 +144,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -143,7 +176,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -153,51 +188,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Education.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EmailFormModel.cs" />
-    <Compile Include="Models\EmailTnguyen.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Information.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MessageService.cs" />
-    <Compile Include="Models\Project.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Skill.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Testimonial.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TnguyenResume.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TnguyenResume.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TnguyenResume.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TnguyenResume.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TnguyenResume.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Work.cs">
-      <DependentUpon>TnguyenResume.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\css\font-awesome\css\font-awesome.css" />
@@ -3045,6 +3044,8 @@
     <Content Include="Content\Login\assets\global\plugins\zoom\jquery.zoom.min.js" />
     <Content Include="Content\Login\assets\global\scripts\datatable.js" />
     <Content Include="Content\Login\assets\global\scripts\metronic.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -3569,16 +3570,6 @@
     <Content Include="Content\Login\assets\global\plugins\typeahead\README.md" />
     <Content Include="Content\Login\assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="Content\Login\assets\global\plugins\uniform\README.md" />
-    <Content Include="Models\TnguyenResume.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TnguyenResume.edmx</DependentUpon>
-      <LastGenOutput>TnguyenResume.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\TnguyenResume.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TnguyenResume.edmx</DependentUpon>
-      <LastGenOutput>TnguyenResume.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -3608,6 +3599,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dirPagination.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -3622,13 +3615,13 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
-    <EntityDeploy Include="Models\TnguyenResume.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TnguyenResume.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TnguyenResume.edmx.diagram">
-      <DependentUpon>TnguyenResume.edmx</DependentUpon>
-    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3641,8 +3634,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\UploadImage.js" />
     <Content Include="Scripts\_references.js" />
@@ -3679,11 +3670,13 @@
     <Content Include="Views\Admin\GetLayOutInformation.cshtml" />
     <Content Include="Views\Admin\EditInformation.cshtml" />
     <Content Include="Views\Project\AdminProject.cshtml" />
+    <Content Include="Views\Layout\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Login\assets\global\plugins\jquery-file-upload\server\php\files\" />
     <Folder Include="Content\Login\assets\global\plugins\jqvmap\jqvmap\maps\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

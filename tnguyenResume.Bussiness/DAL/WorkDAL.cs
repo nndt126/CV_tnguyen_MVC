@@ -10,15 +10,12 @@ namespace tnguyenResume.Bussiness.DAL
 {
     public class WorkDAL : IWorkDAL
     {
-        //private ItnguyenResumeDbContext _itnguyenResumeDbContext;
+        private readonly ItnguyenResumeDbContext _itnguyenResumeDbContext;
 
-        tnguyenResumeDbContext _itnguyenResumeDbContext = null;
-
-        public WorkDAL()
+        public WorkDAL(ItnguyenResumeDbContext itnguyenResumeDbContext)
         {
-            _itnguyenResumeDbContext = new tnguyenResumeDbContext();
+            _itnguyenResumeDbContext = itnguyenResumeDbContext;
         }
-
 
         public IEnumerable<Work> GetAllWorks()
         {
@@ -27,10 +24,49 @@ namespace tnguyenResume.Bussiness.DAL
             return result ?? null;
         }
 
-        public IEnumerable<Work> GetWorkById(Guid bookId)
+        public Work GetWorkById(Guid workId)
         {
-            var result = _itnguyenResumeDbContext.Works.Where(n => n.ID == bookId);
+            var result = _itnguyenResumeDbContext.Works.Where(n => n.ID == workId).FirstOrDefault();
             return result ?? null;
+        }
+
+        public Guid Insert(Work wk)
+        {
+            var result = _itnguyenResumeDbContext.Works.Add(wk);
+            _itnguyenResumeDbContext.SaveChanges();
+            return result.ID;
+        }
+
+        public bool Update(Work wk)
+        {
+            try
+            {
+                //_itnguyenResumeDbContext.Entry(infor).State = EntityState.Modified;
+                _itnguyenResumeDbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //logging
+                return false;
+            }
+        }
+
+        public bool Delete(Work wk)
+        {
+            try
+            {
+                var work = _itnguyenResumeDbContext.Works.Find(wk.ID);
+                _itnguyenResumeDbContext.Works.Remove(work);
+                _itnguyenResumeDbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //logging
+                return false;
+            }
+
         }
     }
 }

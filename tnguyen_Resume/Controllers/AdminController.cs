@@ -1,19 +1,34 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-using tnguyen_Resume.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.IO;
+using tnguyenResume.Bussiness.Interface;
+using tnguyenResume.Bussiness.Model;
 
 namespace tnguyen_Resume.Controllers
 {
     public class AdminController : Controller
     {
-        //
-        // GET: /Admin/
-        tnguyenResumeEntities db = new tnguyenResumeEntities();
+        //    //
+        //    // GET: /Admin/
+        private readonly IWorkDAL _iWorkDAL;
+        private readonly IEducationDAL _iEducationDAL;
+        private readonly ISkillDAL _iSkillDAL;
+        private readonly ITestimonialDAL _iTestimonialDAL;
+        private readonly IinformationDAL _iInformationDAL;
+
+        public AdminController(IWorkDAL iWorkDAL, IEducationDAL iEducationDAL, ISkillDAL iSkillDAL,
+            ITestimonialDAL iTestimonialDAL, IinformationDAL iInformationDAL)
+        {
+            _iWorkDAL = iWorkDAL;
+            _iEducationDAL = iEducationDAL;
+            _iSkillDAL = iSkillDAL;
+            _iTestimonialDAL = iTestimonialDAL;
+            _iInformationDAL = iInformationDAL;
+        }
 
         public ActionResult Index()
         {
@@ -25,53 +40,30 @@ namespace tnguyen_Resume.Controllers
         {
             return View();
         }
-        
+
         public JsonResult GetInfors()
         {
+            Information listInfor = _iInformationDAL.GetInformation();
+            listInfor.About = listInfor.About.Substring(0, listInfor.About.Length >= 50 ? 50 : listInfor.About.Length) + "...";
 
-            List<Information> listInfor = db.Information.ToList();
-            var viewModel = listInfor.Select(x => new
-            {
-                ID = x.ID,
-                FullName = x.FullName,
-                Name = x.Name,
-                Image = x.Image,
-                Phone = x.Phone,
-                Email = x.Email,
-                Address = x.Address,
-                City = x.City,
-                About = x.About.Substring(0, x.About.Length >= 50 ? 50 : x.About.Length) + "...",
-            });
+            var viewModel = listInfor;
+            //});
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetInforByID(Guid Id)
         {
-            db = new tnguyenResumeEntities();
-            var jSonWork = db.Information.Where(n => n.ID == Id).ToList();
-            var infor = jSonWork.Select(x => new {
-                ID = x.ID,
-                FullName = x.FullName,
-                Name = x.Name,
-                Image = x.Image,
-                Phone = x.Phone,
-                Email = x.Email,
-                Address = x.Address,
-                City = x.City,
-                About = x.About,
-            }).FirstOrDefault();
-            return Json(infor, JsonRequestBehavior.AllowGet);
+            var jSonWork = _iInformationDAL.GetInformationById(Id);
+            return Json(jSonWork, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult EditInfor(Guid sID, string sFullName, string sName, string sPhone, string sAddress, string sCity, string sEmail, string sAbout, string sImage )
+        public JsonResult EditInfor(Guid sID, string sFullName, string sName, string sPhone, string sAddress, string sCity, string sEmail, string sAbout, string sImage)
         {
             bool status = false;
-            db = new tnguyenResumeEntities();
-           
-            Information wk = db.Information.SingleOrDefault(n => n.ID == sID);
-         
+            Information wk = _iInformationDAL.GetInformationById(sID);
+
             //Update item
             if (ModelState.IsValid)
             {
@@ -82,9 +74,8 @@ namespace tnguyen_Resume.Controllers
                 wk.Address = sAddress;
                 wk.City = sCity;
                 wk.Email = sEmail;
-                wk.About = sAbout;                
-                db.SaveChanges();
-                status = true;
+                wk.About = sAbout;
+                status = _iInformationDAL.Update(wk);
             }
 
             return Json(new { success = status });
@@ -93,7 +84,7 @@ namespace tnguyen_Resume.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public JsonResult UploadFile()
         {
-            string _imgname = string.Empty;
+            string guidImage = string.Empty;
             var pic = System.Web.HttpContext.Current.Request.Files["MyImages"];
             var sPath = System.Web.HttpContext.Current.Request.Form["sPath"];
             var sPathResize = System.Web.HttpContext.Current.Request.Form["sPathResize"];
@@ -102,9 +93,9 @@ namespace tnguyen_Resume.Controllers
                 var fileName = Path.GetFileName(pic.FileName);
                 var _ext = Path.GetExtension(pic.FileName);
 
-                _imgname = Guid.NewGuid().ToString();
-                var _comPath = Server.MapPath(sPath) + _imgname + _ext;
-                _imgname = _imgname + _ext;
+                guidImage = Guid.NewGuid().ToString();
+                var _comPath = Server.MapPath(sPath) + guidImage + _ext;
+                guidImage = guidImage + _ext;
 
                 ViewBag.Msg = _comPath;
                 var path = _comPath;
@@ -114,13 +105,13 @@ namespace tnguyen_Resume.Controllers
 
                 if (sPathResize != null)
                 {
-                    path = Server.MapPath(sPathResize) + "m-" + _imgname + _ext;
+                    path = Server.MapPath(sPathResize) + "m-" + guidImage + _ext;
                     pic.SaveAs(path);
                 }
 
                 // end resize
             }
-            return Json(Convert.ToString(_imgname), JsonRequestBehavior.AllowGet);
+            return Json(Convert.ToString(guidImage), JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -134,9 +125,8 @@ namespace tnguyen_Resume.Controllers
 
         public JsonResult GetWorks()
         {
-            
-            List<Work> listWork = db.Works.ToList();
-            
+            var listWork = _iWorkDAL.GetAllWorks().ToList();
+
             var viewModel = listWork.Select(x => new
             {
                 ID = x.ID,
@@ -145,43 +135,52 @@ namespace tnguyen_Resume.Controllers
                 WorksDetail = x.WorksDetail.Substring(0, x.WorksDetail.Length >= 50 ? 50 : x.WorksDetail.Length),
                 WorksDate = JsonConvert.SerializeObject(x.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
             });
-            
-            //var result = db.Information.ToList();
+
             return Json(viewModel, JsonRequestBehavior.AllowGet);
-            //return test;
         }
 
         [HttpGet]
         public JsonResult GetbyID(Guid Id)
         {
-            db = new tnguyenResumeEntities();
-            var jSonWork = db.Works.Where(n=>n.ID == Id).ToList();
-            var work = jSonWork.Select(x=> new {
-                ID = x.ID,
-                WorksTitle = x.WorksTitle,
-                WorksInfo = x.WorksInfo,
-                WorksDetail = x.WorksDetail,
-                WorksDate = JsonConvert.SerializeObject(x.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
-            }).FirstOrDefault();
-            return Json(work, JsonRequestBehavior.AllowGet);
+            var jSonWork = _iWorkDAL.GetWorkById(Id);
+            
+            //jSonWork.WorksDate = JsonConvert.SerializeObject(jSonWork.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }) ?? null;
+            //var work = jSonWork.Select(x => new
+            //{
+            //    ID = x.ID,
+            //    WorksTitle = x.WorksTitle,
+            //    WorksInfo = x.WorksInfo,
+            //    WorksDetail = x.WorksDetail,
+            //    WorksDate = JsonConvert.SerializeObject(x.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
+            //}).FirstOrDefault();
+            return Json(jSonWork, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult AddWork(Guid sID, string sWorksTitle,string sWorksInfo,string sWorksDetail, string sWorkDate)
+        public JsonResult AddWork(Guid sID, string sWorksTitle, string sWorksInfo, string sWorksDetail, string sWorkDate)
         {
             bool status = false;
-            db = new tnguyenResumeEntities();
             string sDate = sWorkDate.Trim(new Char[] { '"' });
             DateTime dtWorkDate = Convert.ToDateTime(sDate,
     System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
-            Work wk = db.Works.SingleOrDefault(n => n.ID == sID);
+            Work wk = _iWorkDAL.GetWorkById(sID);
             if (wk == null)
             {
                 //Add new item
                 //DateTime dtWorkDate = DateTime.ParseExact(sDate, "MM-dd-yyyy", null);
-                db.Works.Add(new Work() { WorksTitle = sWorksTitle, WorksInfo = sWorksInfo, WorksDetail = sWorksDetail, WorksDate = dtWorkDate, ID_User = null });
-                db.SaveChanges();
-                status = true;
+                wk = new Work()
+                {
+                    WorksTitle = sWorksTitle,
+                    WorksInfo = sWorksInfo,
+                    WorksDetail = sWorksDetail,
+                    WorksDate = dtWorkDate,
+                    ID_User = null
+                };
+                Guid Id = _iWorkDAL.Insert(wk);
+                if(Id != Guid.Empty)
+                {
+                    status = true;
+                }
             }
             else
             {
@@ -193,7 +192,7 @@ namespace tnguyen_Resume.Controllers
                     wk.WorksDetail = sWorksDetail;
                     //DateTime dtWorkDate = (DateTime.Parse(sDate));
                     wk.WorksDate = dtWorkDate;
-                    db.SaveChanges();
+                    _iWorkDAL.Update(wk);
                     status = true;
                 }
             }
@@ -205,122 +204,118 @@ namespace tnguyen_Resume.Controllers
         public JsonResult DeleteWork(Work delwork)
         {
             bool status = false;
-            db = new tnguyenResumeEntities();
-            var work = db.Works.Find(delwork.ID);
-            db.Works.Remove(work);
-            db.SaveChanges();
-            status = true;
+            status = _iWorkDAL.Delete(delwork);
             return Json(new { success = status });
         }
         #endregion
 
-        #region Get/Add/Edit/Delete Education MVC
-        //Chỉnh sửa sản phẩm
-        [HttpGet]
-        public ActionResult EditInformation(Guid ID)
-        {
-            Information edu = db.Information.SingleOrDefault(n => n.ID == ID);
-            if (edu == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
+        //    #region Get/Add/Edit/Delete Education MVC
+        //    //Chỉnh sửa sản phẩm
+        //    [HttpGet]
+        //    public ActionResult EditInformation(Guid ID)
+        //    {
+        //        Information edu = db.Information.SingleOrDefault(n => n.ID == ID);
+        //        if (edu == null)
+        //        {
+        //            Response.StatusCode = 404;
+        //            return null;
+        //        }
 
-            return View(edu);
-        }
+        //        return View(edu);
+        //    }
 
 
-        public ActionResult EducationAdmin()
-        {
-            return View(db.Educations.ToList());
-        }
+        //    public ActionResult EducationAdmin()
+        //    {
+        //        return View(db.Educations.ToList());
+        //    }
 
-        //Chỉnh sửa sản phẩm
-        [HttpGet]
-        public ActionResult EditEducations(Guid ID)
-        {
-            Education edu = db.Educations.SingleOrDefault(n => n.ID == ID);
-            if (edu == null)
-            {
-                Response.StatusCode = 404;
-                  return null;
-            }
-           
-            return View(edu);
-        }
+        //    //Chỉnh sửa sản phẩm
+        //    [HttpGet]
+        //    public ActionResult EditEducations(Guid ID)
+        //    {
+        //        Education edu = db.Educations.SingleOrDefault(n => n.ID == ID);
+        //        if (edu == null)
+        //        {
+        //            Response.StatusCode = 404;
+        //              return null;
+        //        }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult EditEducations(Education edu, FormCollection f)
-        {
-            Education eduDB = db.Educations.SingleOrDefault(n => n.ID == edu.ID);
-            //Thêm vào cơ sở dữ liệu
-            if (ModelState.IsValid)
-            {
-                eduDB.EducationTitle = edu.EducationTitle;
-                eduDB.EducationInfo = edu.EducationInfo;
-                eduDB.EducationDetail = edu.EducationDetail;
-                eduDB.EducationDate = edu.EducationDate;
-                //Thực hiện cập nhật trong model
-                //db.Educations.Add(eduDB);
-                db.SaveChanges();
-            }
+        //        return View(edu);
+        //    }
 
-            return RedirectToAction("EducationAdmin");
-        }
+        //    [HttpPost]
+        //    [ValidateInput(false)]
+        //    public ActionResult EditEducations(Education edu, FormCollection f)
+        //    {
+        //        Education eduDB = db.Educations.SingleOrDefault(n => n.ID == edu.ID);
+        //        //Thêm vào cơ sở dữ liệu
+        //        if (ModelState.IsValid)
+        //        {
+        //            eduDB.EducationTitle = edu.EducationTitle;
+        //            eduDB.EducationInfo = edu.EducationInfo;
+        //            eduDB.EducationDetail = edu.EducationDetail;
+        //            eduDB.EducationDate = edu.EducationDate;
+        //            //Thực hiện cập nhật trong model
+        //            //db.Educations.Add(eduDB);
+        //            db.SaveChanges();
+        //        }
 
-        //Xóa sản phẩm
-        [HttpGet]
-        public ActionResult Xoa(Guid ID)
-        {
-            //Lấy ra đối tượng sách theo mã 
-            Education edu = db.Educations.SingleOrDefault(n => n.ID == ID);
-            if (edu == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
+        //        return RedirectToAction("EducationAdmin");
+        //    }
 
-            return View(edu);
-        }
-        [HttpPost, ActionName("Xoa")]
+        //    //Xóa sản phẩm
+        //    [HttpGet]
+        //    public ActionResult Xoa(Guid ID)
+        //    {
+        //        //Lấy ra đối tượng sách theo mã 
+        //        Education edu = db.Educations.SingleOrDefault(n => n.ID == ID);
+        //        if (edu == null)
+        //        {
+        //            Response.StatusCode = 404;
+        //            return null;
+        //        }
 
-        public ActionResult XacNhanXoa(Guid ID)
-        {
-            Education sach = db.Educations.SingleOrDefault(n => n.ID == ID);
-            if (sach == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            db.Educations.Remove(sach);
-            db.SaveChanges();
-            return RedirectToAction("EducationAdmin");
+        //        return View(edu);
+        //    }
+        //    [HttpPost, ActionName("Xoa")]
 
-        }
-        [HttpDelete]
-        public ActionResult DeleteAjax(int id)
-        {
-            Delete(id);
-            return RedirectToAction("EducationAdmin");
-        }
+        //    public ActionResult XacNhanXoa(Guid ID)
+        //    {
+        //        Education sach = db.Educations.SingleOrDefault(n => n.ID == ID);
+        //        if (sach == null)
+        //        {
+        //            Response.StatusCode = 404;
+        //            return null;
+        //        }
+        //        db.Educations.Remove(sach);
+        //        db.SaveChanges();
+        //        return RedirectToAction("EducationAdmin");
 
-        public bool Delete(int id)
-        {
-            try
-            {
-                var edu = db.Educations.Find(id);
-                db.Educations.Remove(edu);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-           
-        }
-        #endregion
+        //    }
+        //    [HttpDelete]
+        //    public ActionResult DeleteAjax(int id)
+        //    {
+        //        Delete(id);
+        //        return RedirectToAction("EducationAdmin");
+        //    }
+
+        //    public bool Delete(int id)
+        //    {
+        //        try
+        //        {
+        //            var edu = db.Educations.Find(id);
+        //            db.Educations.Remove(edu);
+        //            db.SaveChanges();
+        //            return true;
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return false;
+        //        }
+
+        //    }
+        //    #endregion
 
     }
 }

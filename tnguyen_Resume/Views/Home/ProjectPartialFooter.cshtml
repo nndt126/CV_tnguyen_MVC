@@ -1,19 +1,18 @@
-﻿@using tnguyen_Resume.Models;
-@model List<Project>
+﻿@model List<tnguyenResume.Bussiness.Model.Project>
 
 <div class="widget widget_tweets">
     <h4 class="widget-title">Latest Project</h4>
     <ul id="twitter">
         @{
-            foreach(var item in Model)
+            foreach (var item in Model)
             {
-                 <li>
+                <li>
                     <span>
                         @item.ProjectDetail
                         <a href="#">
                             @if (@item.ProjectURL == null)
                             {
-                                
+
                             }
                             else
                             {

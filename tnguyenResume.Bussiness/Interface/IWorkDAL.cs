@@ -10,6 +10,9 @@ namespace tnguyenResume.Bussiness.Interface
     public interface IWorkDAL
     {
         IEnumerable<Work> GetAllWorks();
-        IEnumerable<Work> GetWorkById(Guid bookId);
+        Work GetWorkById(Guid workId);
+        Guid Insert(Work wk);
+        bool Update(Work wk);
+        bool Delete(Work wk);
     }
 }

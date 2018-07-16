@@ -149,7 +149,7 @@ header .scrolldown a:hover { color: #11ABB0; }
 ul#nav {
    min-height: 48px;
    width: auto;
-
+   letter-spacing : 5px;
    /* center align the menu */
    text-align: center;
 }
@@ -996,3 +996,12 @@ footer .social-links li:first-child { margin-left: 0; }
     align-items:center;
 }
 
+ul#nav li nav-item{
+    margin-bottom: -1px;
+}
+
+ul#nav li .nav-item .nav-link{
+    border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}

@@ -51,7 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\AccountDAL.cs" />
+    <Compile Include="DAL\EducationDAL.cs" />
+    <Compile Include="DAL\InformationDAL.cs" />
+    <Compile Include="DAL\ProjectDAL.cs" />
+    <Compile Include="DAL\SkilDAL.cs" />
+    <Compile Include="DAL\TestimonialDAL.cs" />
     <Compile Include="DAL\WorkDAL.cs" />
+    <Compile Include="Interface\IAccountDAL.cs" />
+    <Compile Include="Interface\IEducationDAL.cs" />
+    <Compile Include="Interface\IinformationDAL.cs" />
+    <Compile Include="Interface\IProjectDAL.cs" />
+    <Compile Include="Interface\ISkillDAL.cs" />
+    <Compile Include="Interface\ITestimonialDAL.cs" />
     <Compile Include="Interface\ItnguyenResumeDbContext.cs" />
     <Compile Include="Interface\IWorkDAL.cs" />
     <Compile Include="Model\Account.cs" />

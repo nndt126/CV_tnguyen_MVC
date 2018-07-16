@@ -1,5 +1,7 @@
 ﻿@*@using tnguyen_Resume.Models;*@
 @using tnguyenResume.Bussiness.Model;
+
+
 <!DOCTYPE html>
 <!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
@@ -54,7 +56,7 @@
                 <li><a class="smoothscroll" href="#project">Project</a></li>
                 <li><a class="smoothscroll" href="#testimonials">Testimonials</a></li>
                 <li><a class="smoothscroll" href="#contact">Contact</a></li>
-                @{
+                @*@{
                     var user = Session["username"];
                 }
                 @if (user != null)
@@ -65,7 +67,8 @@
                 else
                 {
                     <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                }
+                }*@
+                @Html.Partial("~/Views/Layout/_LoginPartial.cshtml")
             </ul> <!-- end #nav -->
         </nav> <!-- end #nav-wrap -->
 
@@ -73,7 +76,7 @@
             <div class="banner-text">
                 <h1 class="responsive-headline">I'm Thành Nguyễn.</h1>
                 <h3>
-                    Developer BackEnd <span>ASP.Net </span> - <span>SharePoint</span> and <span>Winform. </span><br /> Let's <a class="smoothscroll" href="#about">start scrolling</a>
+                    Fullstack Developer <span>.Net </span> - <span>MVC</span> and <span>Javascript. </span><br /> Let's <a class="smoothscroll" href="#about">start scrolling</a>
                     and know <a class="smoothscroll" href="#about">about me</a>.
                 </h3>
                 <hr />
@@ -94,14 +97,14 @@
     <!-- About Section
     ================================================== -->
     <section id="about">
-        @*@Html.Action("InformationPartial", "Home")*@
+        @Html.Action("InformationPartial", "Home")
     </section> <!-- About Section End-->
     <!-- Resume Section
     ================================================== -->
     <section id="resume">
         <!-- Education
         ----------------------------------------------- -->
-        @*@Html.Action("EducationPartial", "Resume")*@
+        @Html.Action("EducationPartial", "Resume")
         <!-- End Education -->
         <!-- Work
         ----------------------------------------------- -->
@@ -109,18 +112,18 @@
          <!-- End Work -->
         <!-- Skills
         ----------------------------------------------- -->
-        @*@Html.Action("SkillPartial", "Resume")*@
+        @Html.Action("SkillPartial", "Resume")
 
     </section> <!-- Resume Section End-->
     <!-- project Section
     ================================================== -->
     <section id="project">
-        @*@Html.Action("ProjectPartial", "Project")*@
+        @Html.Action("ProjectPartial", "Project")
     </section> <!-- project Section End-->
     <!-- Testimonials Section
     ================================================== -->
     <section id="testimonials">
-        @*@Html.Action("TestimonialPartial", "Resume")*@
+        @Html.Action("TestimonialPartial", "Resume")
     </section> <!-- Testimonials Section End-->
     <!-- Contact Section
     ================================================== -->
@@ -150,7 +153,7 @@
                         <span>(84) 909 921 135</span>
                     </p>
                 </div>
-                @*@Html.Action("ProjectPartialFooter", "Home")*@
+                @Html.Action("ProjectPartialFooter", "Home")
             </aside>
         </div>
     </section> <!-- Contact Section End-->

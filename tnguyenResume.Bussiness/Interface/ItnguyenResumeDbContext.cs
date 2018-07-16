@@ -17,5 +17,6 @@ namespace tnguyenResume.Bussiness.Interface
         DbSet<Skill> Skills { get; set; }
         DbSet<Testimonial> Testimonials { get; set; }
         DbSet<Work> Works { get; set; }
+        int SaveChanges();
     }
 }

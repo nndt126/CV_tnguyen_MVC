@@ -1,4 +1,4 @@
-﻿@model IEnumerable<tnguyen_Resume.Models.Information>
+﻿@model tnguyenResume.Bussiness.Model.Information
 
 @{
     ViewBag.Title = "GetLayOutInformation";
@@ -81,35 +81,35 @@
                     <thead>
                         <tr class='warning'>
                             <th ng-click="sort('FullName')">
-                                @Html.DisplayNameFor(model => model.First().FullName)
+                                @Html.DisplayNameFor(model => model.FullName)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='FullName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('Name')">
-                                @Html.DisplayNameFor(model => model.First().Name)
+                                @Html.DisplayNameFor(model => model.Name)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='Name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('Image')">
-                                @Html.DisplayNameFor(model => model.First().Image)
+                                @Html.DisplayNameFor(model => model.Image)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='Image'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('Phone')">
-                                @Html.DisplayNameFor(model => model.First().Phone)
+                                @Html.DisplayNameFor(model => model.Phone)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='Phone'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('Address')">
-                                @Html.DisplayNameFor(model => model.First().Address)
+                                @Html.DisplayNameFor(model => model.Address)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='Address'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('City')">
-                                @Html.DisplayNameFor(model => model.First().City)
+                                @Html.DisplayNameFor(model => model.City)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='City'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th width="10%" ng-click="sort('Email')">
-                                @Html.DisplayNameFor(model => model.First().Email)
+                                @Html.DisplayNameFor(model => model.Email)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='Email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th ng-click="sort('About')">
-                                @Html.DisplayNameFor(model => model.First().About)
+                                @Html.DisplayNameFor(model => model.About)
                                 <span class="glyphicon sort-icon" ng-show="sortKey=='About'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                             </th>
                             <th>
@@ -135,18 +135,19 @@
                             <td><button class="btn btn-primary" onclick="HiddenRow()">Cancel</button></td>
                         </tr>*@
                         @*<tr dir-paginate="data in Works | orderBy:sortKey:reverse | filter : searchWork|itemsPerPage:3">*@
-                            <tr ng-repeat="data in Infors">
-                                <td>{{data.FullName}}</td>
-                                <td>{{data.Name}}</td>
-                                <td><img alt="" class="img-responsive" ng-src="~/Content/images/profile/{{data.Image}}" /></td>
-                                <td>{{data.Phone}}</td>
-                                <td>{{data.Address}}</td>
-                                <td>{{data.City}}</td>
-                                <td>{{data.Email}}</td>
-                                <td>{{data.About}}</td>
-                            <td class="text-center"><button class="btn btn-warning" ng-click="getInformationByID(data)">Edit</button></td>
+                            @*<tr ng-repeat="data in Infors">*@
+                        <tr>
+                                <td>{{Infors.FullName}}</td>
+                                <td>{{Infors.Name}}</td>
+                                <td><img alt="" class="img-responsive" ng-src="~/Content/images/profile/{{Infors.Image}}" /></td>
+                                <td>{{Infors.Phone}}</td>
+                                <td>{{Infors.Address}}</td>
+                                <td>{{Infors.City}}</td>
+                                <td>{{Infors.Email}}</td>
+                                <td>{{Infors.About}}</td>
+                            <td class="text-center"><button class="btn btn-warning" ng-click="getInformationByID(Infors)">Edit</button></td>
                             @*<td><a class="edit" href="@Url.Action("EditWorks")">Edit</a></td>*@
-                            <td class="text-center"><button class="btn btn-danger" ng-click="deleteWork(data)">Delete</button></td>
+                            <td class="text-center"><button class="btn btn-danger" ng-click="deleteWork(Infors)">Delete</button></td>
                             @*<td><a class="delete" href="@Url.Action("Xoa")">Delete</a></td>*@
                         </tr>
                     </tbody>

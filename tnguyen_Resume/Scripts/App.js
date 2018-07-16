@@ -224,9 +224,14 @@ function SaveImage(sPath, sPathResize) {
     if (files.length > 0) {
         data.append("MyImages", files[0]);
     }
+    if (sPath == undefined || sPathResize == undefined) {
+        sPath = "/Content/images/profile/";
+        sPathResize = null;
+    }
     data.append("sPath", sPath);
     if (sPathResize != null)
         data.append("sPathResize", sPathResize);
+    
     $.ajax({
         url: "/Admin/UploadFile",
         type: "POST",

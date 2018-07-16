@@ -1,9 +1,0 @@
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\tnguyenResume.Bussiness.dll.config
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\tnguyenResume.Bussiness.dll
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\tnguyenResume.Bussiness.pdb
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\EntityFramework.dll
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\EntityFramework.SqlServer.dll
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\EntityFramework.xml
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\bin\Debug\EntityFramework.SqlServer.xml
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\obj\Debug\tnguyenResume.Bussiness.dll
-E:\Code\CV_tnguyen_MVC\tnguyenResume.Bussiness\obj\Debug\tnguyenResume.Bussiness.pdb

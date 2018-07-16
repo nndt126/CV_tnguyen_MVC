@@ -7,7 +7,7 @@ using tnguyen_Resume.Models;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-
+using tnguyenResume.Bussiness.Interface;
 
 namespace tnguyen_Resume.Controllers
 {
@@ -15,7 +15,16 @@ namespace tnguyen_Resume.Controllers
     {
         //
         // GET: /Home/
-        tnguyenResumeEntities db = new tnguyenResumeEntities();
+        private readonly IinformationDAL _iInformationDAL;
+        private readonly IProjectDAL _iProjectDAL;
+
+        public HomeController(IinformationDAL iInformationDAL, IProjectDAL iProjectDAL)
+        {
+            _iInformationDAL = iInformationDAL;
+            _iProjectDAL = iProjectDAL;
+        }
+
+
         public ActionResult Index()
         {
             return View();
@@ -23,8 +32,8 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult InformationPartial()
         {
-            //var info = db.Information.FirstOrDefault();
-            return PartialView();
+            var model = _iInformationDAL.GetInformation();
+            return PartialView(model);
         }
 
         [HttpGet]
@@ -61,11 +70,8 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult ProjectPartialFooter()
         {
-            ////Lấy ra Ma User đầu tiên trong csdl
-            //Guid id_User = db.Projects.ToList().ElementAt(0).ID_User ?? Guid.Empty;
-            ////int id_User = 1;
-            //var pj = db.Projects.Where(t => t.ID_User == id_User).OrderByDescending(t => t.ProjectTime).Take(2).ToList();
-            return PartialView();
+            var model = _iProjectDAL.GetProjects(2);
+            return PartialView(model);
         }
 
     }

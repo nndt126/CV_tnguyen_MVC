@@ -4,22 +4,21 @@ namespace tnguyenResume.Bussiness.Model
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-
-    public partial class tnguyenResumeDbContext : DbContext
+    using Interface;
+    public partial class tnguyenResumeDbContext : DbContext, ItnguyenResumeDbContext
     {
+        static tnguyenResumeDbContext()
+        {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<tnguyenResumeDbContext, Configuration>());
+            Database.SetInitializer<tnguyenResumeDbContext>(new CreateDatabaseIfNotExists<tnguyenResumeDbContext>());
+        }
+
         public tnguyenResumeDbContext()
             : base("name=tnguyenResumeDbContext")
         {
-            try
-            {
-                Database.SetInitializer<tnguyenResumeDbContext>(null);
-                Database.SetInitializer(new CreateDatabaseIfNotExists<tnguyenResumeDbContext>());
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
         }
+
+        
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Education> Educations { get; set; }

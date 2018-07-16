@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using tnguyen_Resume.Models;
+using tnguyenResume.Bussiness.Interface;
+using tnguyenResume.Bussiness.Model;
 
 namespace tnguyen_Resume.Controllers
 {
@@ -14,7 +16,14 @@ namespace tnguyen_Resume.Controllers
         //
         // GET: /Project/
 
-        tnguyenResumeEntities db = new tnguyenResumeEntities();
+        private readonly IProjectDAL _iProjectDAL;
+
+        public ProjectController(IProjectDAL iProjectDAL)
+        {
+            _iProjectDAL = iProjectDAL;
+        }
+
+
         public ActionResult Index()
         {
             return View();
@@ -22,11 +31,8 @@ namespace tnguyen_Resume.Controllers
 
         public PartialViewResult ProjectPartial()
         {
-            //Lấy ra Ma User đầu tiên trong csdl
-            Guid id_User = db.Projects.ToList().ElementAt(0).ID_User ?? Guid.Empty;
-            //int id_User = 1;
-            var pj = db.Projects.Where(t => t.ID_User == id_User).OrderByDescending(t=>t.ProjectTime).ToList();
-            return PartialView(pj);
+            var model = _iProjectDAL.GetProjects(0);
+            return PartialView(model);
         }
 
         public ActionResult AdminProject()
@@ -36,7 +42,7 @@ namespace tnguyen_Resume.Controllers
 
         public JsonResult GetProjects()
         {
-            List<Project> listWork = db.Projects.ToList();
+            List<Project> listWork = _iProjectDAL.GetProjects(0).ToList();
             var projectModel = listWork.Select(x => new
             {
                 ID = x.ID,
@@ -44,10 +50,10 @@ namespace tnguyen_Resume.Controllers
                 ProjectInfo = x.ProjectInfo,
                 ProjectDetail = x.ProjectDetail.Substring(0, x.ProjectDetail.Length >= 50 ? 50 : x.ProjectDetail.Length) + "...",
                 ProjectImage = x.ProjectImage,
-                ProjectJob= x.ProjectJob,
+                ProjectJob = x.ProjectJob,
                 ProjectURL = x.ProjectURL.Substring(0, x.ProjectURL.Length >= 50 ? 25 : x.ProjectURL.Length) + "...",
                 ProjectTime = JsonConvert.SerializeObject(x.ProjectTime, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
-            });
+            }).ToList();
 
             return Json(projectModel, JsonRequestBehavior.AllowGet);
         }
@@ -55,36 +61,44 @@ namespace tnguyen_Resume.Controllers
         [HttpGet]
         public JsonResult GetProjectsByID(Guid Id)
         {
-            db = new tnguyenResumeEntities();
-            var jSonWork = db.Projects.Where(n => n.ID == Id).ToList();
-            var infor = jSonWork.Select(x => new {
-                ID = x.ID,
-                ProjectImage = x.ProjectImage,
-                ProjectTitle = x.ProjectTitle,
-                ProjectInfo = x.ProjectInfo,
-                ProjectDetail = x.ProjectDetail,
-                ProjectJob = x.ProjectJob,
-                ProjectURL = x.ProjectURL,
-                ProjectTime = JsonConvert.SerializeObject(x.ProjectTime, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
-            }).FirstOrDefault();
-            return Json(infor, JsonRequestBehavior.AllowGet);
+            var jSonWork = _iProjectDAL.GetProjectById(Id);
+            //var infor = jSonWork.Select(x => new
+            //{
+            //    ID = x.ID,
+            //    ProjectImage = x.ProjectImage,
+            //    ProjectTitle = x.ProjectTitle,
+            //    ProjectInfo = x.ProjectInfo,
+            //    ProjectDetail = x.ProjectDetail,
+            //    ProjectJob = x.ProjectJob,
+            //    ProjectURL = x.ProjectURL,
+            //    ProjectTime = JsonConvert.SerializeObject(x.ProjectTime, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
+            //}).FirstOrDefault();
+            return Json(jSonWork, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult EditProject(Guid sID, string sProjectImage, string sProjectTitle, string sProjectInfo, string sProjectDetail, string sProjectJob, string sProjectURL, string sProjectTime)
         {
             bool status = false;
-            db = new tnguyenResumeEntities();
             string sDate = sProjectTime.Trim(new Char[] { '"' });
             DateTime dtProjectTime = Convert.ToDateTime(sDate,
     System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
-            Project pj = db.Projects.SingleOrDefault(n => n.ID == sID);
+            Project pj = _iProjectDAL.GetProjectById(sID);
             if (pj == null)
             {
+                var prj = new Project() {
+                    ProjectTitle = sProjectTitle,
+                    ProjectInfo = sProjectInfo,
+                    ProjectDetail = sProjectDetail,
+                    ProjectJob = sProjectJob,
+                    ProjectTime = dtProjectTime,
+                    ProjectURL = sProjectURL,
+                    ProjectImage = sProjectImage,
+                    ID_User = null };
                 //Add new item
-                db.Projects.Add(new Project() { ProjectTitle = sProjectTitle, ProjectInfo = sProjectInfo, ProjectDetail = sProjectDetail, ProjectJob = sProjectJob, ProjectTime = dtProjectTime, ProjectURL = sProjectURL, ProjectImage = sProjectImage, ID_User = null });
-                db.SaveChanges();
-                status = true;
+                Guid prjID = _iProjectDAL.Insert(prj);
+                if (prjID != Guid.Empty)
+                    status = true;
             }
             else
             {
@@ -98,7 +112,7 @@ namespace tnguyen_Resume.Controllers
                     pj.ProjectTime = dtProjectTime;
                     pj.ProjectURL = sProjectURL;
                     pj.ProjectImage = sProjectImage;
-                    db.SaveChanges();
+                    _iProjectDAL.Update(pj);
                     status = true;
                 }
             }
