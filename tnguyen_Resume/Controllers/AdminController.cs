@@ -147,22 +147,9 @@ namespace tnguyen_Resume.Controllers
             var jSonWork = _iWorkDAL.GetWorkById(Id);
             //DateTime dt = DateTime.ParseExact(jSonWork.WorksDate.ToString(), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
 
-            string s = jSonWork.WorksDate.Value.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
-
-            //jSonWork.WorksDate = DateTime.ParseExact(jSonWork.WorksDate.ToString(),
-            //                             "ddMMyyyy",
-            //                             CultureInfo.InvariantCulture);
-            //jSonWork.WorksDate = JsonConvert.SerializeObject(jSonWork.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }) ?? null;
-            //var work = jSonWork.Select(x => new
-            //{
-            //    ID = x.ID,
-            //    WorksTitle = x.WorksTitle,
-            //    WorksInfo = x.WorksInfo,
-            //    WorksDetail = x.WorksDetail,
-            //    WorksDate = JsonConvert.SerializeObject(x.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
-            //}).FirstOrDefault();
-            //var jsonData = new[] { jSonWork, s };
-            return Json(jSonWork, JsonRequestBehavior.AllowGet);
+            string sWorksDate = jSonWork.WorksDate.Value.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+            var data = new { jSonWork, sWorksDate };
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -207,7 +194,7 @@ namespace tnguyen_Resume.Controllers
                 }
             }
 
-            return Json(new { success = status });
+            return Json(status);
         }
 
         [HttpPost]

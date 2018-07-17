@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -62,6 +63,8 @@ namespace tnguyen_Resume.Controllers
         public JsonResult GetProjectsByID(Guid Id)
         {
             var jSonWork = _iProjectDAL.GetProjectById(Id);
+            string sProjectTime = jSonWork.ProjectTime.Value.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+            var data = new { jSonWork, sProjectTime };
             //var infor = jSonWork.Select(x => new
             //{
             //    ID = x.ID,
@@ -73,7 +76,7 @@ namespace tnguyen_Resume.Controllers
             //    ProjectURL = x.ProjectURL,
             //    ProjectTime = JsonConvert.SerializeObject(x.ProjectTime, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
             //}).FirstOrDefault();
-            return Json(jSonWork, JsonRequestBehavior.AllowGet);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -117,7 +120,7 @@ namespace tnguyen_Resume.Controllers
                 }
             }
 
-            return Json(new { success = status });
+            return Json(status);
         }
     }
 }

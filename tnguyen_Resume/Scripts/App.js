@@ -22,10 +22,10 @@ myApp.controller('projectController', function ($scope, $http) {
         $http.get('/Project/GetProjectsByID/' + data.ID)
         .success(function (data) {
             //debugger;
-            $scope.sID = data.ID; $scope.sProjectTitle = data.ProjectTitle;
-            $scope.sProjectInfo = data.ProjectInfo; $scope.sProjectDetail = data.ProjectDetail;
-            $scope.sProjectJob = data.ProjectJob; $scope.sProjectURL = data.ProjectURL;
-            $scope.sProjectTime = data.ProjectTime; $scope.sProjectImage = data.ProjectImage;
+            $scope.sID = data.jSonWork.ID; $scope.sProjectTitle = data.jSonWork.ProjectTitle;
+            $scope.sProjectInfo = data.jSonWork.ProjectInfo; $scope.sProjectDetail = data.jSonWork.ProjectDetail;
+            $scope.sProjectJob = data.jSonWork.ProjectJob; $scope.sProjectURL = data.jSonWork.ProjectURL;
+            $scope.sProjectTime = data.sProjectTime.ProjectTime; $scope.sProjectImage = data.jSonWork.ProjectImage;
         })
         .error(function (data) {
             console.log("loi roi");
@@ -49,8 +49,10 @@ myApp.controller('projectController', function ($scope, $http) {
         }
         $http.post('/Project/EditProject/', { sID, sProjectTitle: $scope.sProjectTitle, sProjectInfo: $scope.sProjectInfo, sProjectImage: $scope.sProjectImage, sProjectDetail: $scope.sProjectDetail, sProjectJob: $scope.sProjectJob, sProjectURL: $scope.sProjectURL, sProjectTime: $scope.sProjectTime})
         .success(function (result) {
-            $scope.Projects = result;
+            //$scope.Projects = result;
+            alert("Successfull");
             $scope.sID = null;
+            HiddenRow();
             $scope.getData();
         })
         .error(function (data) {
@@ -148,18 +150,16 @@ myApp.controller('workController', function ($scope, $http) {
         $http.get('/Admin/GetWorkById/' + data.ID)
         .success(function (data) {
             //debugger;
-            $scope.sID = data.ID;
-            $scope.sWorksTitle = data.WorksTitle; $scope.sWorksInfo = data.WorksInfo;
-            $scope.sWorksDetail = data.WorksDetail; $scope.sWorkDate = data.WorksDate;
-            
-            //getallData();
+            $scope.sID = data.jSonWork.ID;
+            $scope.sWorksTitle = data.jSonWork.WorksTitle; $scope.sWorksInfo = data.jSonWork.WorksInfo;
+            $scope.sWorksDetail = data.jSonWork.WorksDetail; $scope.sWorkDate = data.sWorksDate;
         })
         .error(function (data) {
             console.log("loi roi");
         });
     };
     
-    //******=========Save Customer=========******
+    //******=========Save Work=========******
     $scope.addWork = function () {
         if ($scope.sID != null) {
             sID = $scope.sID;
@@ -171,8 +171,9 @@ myApp.controller('workController', function ($scope, $http) {
         
         $http.post('/Admin/AddWork/', { sID, sWorksTitle: $scope.sWorksTitle, sWorksInfo: $scope.sWorksInfo, sWorksDetail: $scope.sWorksDetail, sWorkDate: $scope.sWorkDate })
         .success(function (result) {
-            $scope.Works = result;
+            alert("Successful");
             $scope.sID = null;
+            HiddenRow();
             $scope.getData();
         })
         .error(function (data) {
@@ -180,7 +181,7 @@ myApp.controller('workController', function ($scope, $http) {
         });
     };
 
-    //******=========Delete Customer=========******
+    //******=========Delete Work=========******
     $scope.deleteWork = function (data) {
         var IsConf = confirm('You are about to delete ' + data.WorksTitle + '. Are you sure?');
         if (IsConf) {

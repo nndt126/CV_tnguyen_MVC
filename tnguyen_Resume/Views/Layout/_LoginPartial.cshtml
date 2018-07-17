@@ -12,7 +12,7 @@
         </li>
     }*@
     <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-    <li>@Html.ActionLink("Welcome " + User.Identity.GetUserId(), "Index", "Admin", null, new { @style = "font-family: 'Exo', sans-serif; color: #5379fa !important" })</li>
+    <li>@Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Index", "Admin", null, new { @style = "font-family: 'Exo', sans-serif; color: #5379fa !important" })</li>
 }
 else
 {

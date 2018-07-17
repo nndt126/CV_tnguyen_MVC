@@ -66,7 +66,7 @@ namespace tnguyen_Resume.Controllers
                     if (loginInfo != null)
                     {
                         // Login In.    
-                        this.SignInUser(loginInfo.UserName, false);
+                        this.SignInUser(loginInfo.UserName, loginInfo.ID, false);
 
                         ViewBag.ThongBao = "Login Successfull!";
                         Session["username"] = loginInfo.UserName;
@@ -167,7 +167,7 @@ namespace tnguyen_Resume.Controllers
             return this.RedirectToAction("Index", "Home");
         }
 
-        private void SignInUser(string username, bool isPersistent)
+        private void SignInUser(string username, Guid userId, bool isPersistent)
         {
             // Initialization.    
             var claims = new List<Claim>();
@@ -175,6 +175,7 @@ namespace tnguyen_Resume.Controllers
             {
                 // Setting    
                 claims.Add(new Claim(ClaimTypes.Name, username));
+                claims.Add(new Claim(ClaimTypes.UserData, userId.ToString()));
                 var claimIdenties = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
                 var ctx = Request.GetOwinContext();
                 var authenticationManager = ctx.Authentication;
