@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    @*using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
         <li class="nav-item">
@@ -10,7 +10,9 @@
         <li class="nav-item">
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
         </li>
-    }
+    }*@
+    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+    <li>@Html.ActionLink("Welcome " + User.Identity.GetUserId(), "Index", "Admin", null, new { @style = "font-family: 'Exo', sans-serif; color: #5379fa !important" })</li>
 }
 else
 {

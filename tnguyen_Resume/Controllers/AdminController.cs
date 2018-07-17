@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -140,10 +142,16 @@ namespace tnguyen_Resume.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetbyID(Guid Id)
+        public JsonResult GetWorkById(Guid Id)
         {
             var jSonWork = _iWorkDAL.GetWorkById(Id);
-            
+            //DateTime dt = DateTime.ParseExact(jSonWork.WorksDate.ToString(), "MM/dd/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+
+            string s = jSonWork.WorksDate.Value.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+            //jSonWork.WorksDate = DateTime.ParseExact(jSonWork.WorksDate.ToString(),
+            //                             "ddMMyyyy",
+            //                             CultureInfo.InvariantCulture);
             //jSonWork.WorksDate = JsonConvert.SerializeObject(jSonWork.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }) ?? null;
             //var work = jSonWork.Select(x => new
             //{
@@ -153,6 +161,7 @@ namespace tnguyen_Resume.Controllers
             //    WorksDetail = x.WorksDetail,
             //    WorksDate = JsonConvert.SerializeObject(x.WorksDate, Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "dd-MM-yyyy" }).Trim(new Char[] { '"' }),
             //}).FirstOrDefault();
+            //var jsonData = new[] { jSonWork, s };
             return Json(jSonWork, JsonRequestBehavior.AllowGet);
         }
 
@@ -162,8 +171,9 @@ namespace tnguyen_Resume.Controllers
             bool status = false;
             string sDate = sWorkDate.Trim(new Char[] { '"' });
             DateTime dtWorkDate = Convert.ToDateTime(sDate,
-    System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                    CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
             Work wk = _iWorkDAL.GetWorkById(sID);
+            string userID = User.Identity.GetUserId();
             if (wk == null)
             {
                 //Add new item
@@ -174,7 +184,7 @@ namespace tnguyen_Resume.Controllers
                     WorksInfo = sWorksInfo,
                     WorksDetail = sWorksDetail,
                     WorksDate = dtWorkDate,
-                    ID_User = null
+                    ID_User = new Guid(userID)
                 };
                 Guid Id = _iWorkDAL.Insert(wk);
                 if(Id != Guid.Empty)

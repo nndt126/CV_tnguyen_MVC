@@ -30,6 +30,7 @@ namespace tnguyenResume.Bussiness.Model
         public string ProjectURL { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:dd/M/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? ProjectTime { get; set; }
 
         public Guid? ID_User { get; set; }

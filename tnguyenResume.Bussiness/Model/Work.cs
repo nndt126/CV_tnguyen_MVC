@@ -17,6 +17,7 @@ namespace tnguyenResume.Bussiness.Model
         public string WorksInfo { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:dd/M/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? WorksDate { get; set; }
 
         [Column(TypeName = "ntext")]

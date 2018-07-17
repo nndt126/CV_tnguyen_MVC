@@ -35,7 +35,8 @@ namespace tnguyen_Resume.Controllers
                 // Verification.    
                 if (this.Request.IsAuthenticated)
                 {
-                    // Info.    
+                    // Info.
+                    ViewBag.ReturnUrl = returnUrl;
                     return this.RedirectToLocal(returnUrl);
                 }
             }
@@ -44,6 +45,7 @@ namespace tnguyen_Resume.Controllers
                 // Info    
                 Console.Write(ex);
             }
+            ViewBag.ReturnUrl = returnUrl;
             // Info.    
             return this.View();
         }
@@ -152,8 +154,7 @@ namespace tnguyen_Resume.Controllers
                 // Verification.    
                 if (Url.IsLocalUrl(returnUrl))
                 {
-                    // Info.    
-                    ViewBag.ReturnUrl = returnUrl;
+                    // Info.        
                     return this.Redirect(returnUrl);
                 }
             }
@@ -163,7 +164,6 @@ namespace tnguyen_Resume.Controllers
                 throw ex;
             }
             // Info.    
-            ViewBag.ReturnUrl = Url.RouteUrl("Index","Home");
             return this.RedirectToAction("Index", "Home");
         }
 

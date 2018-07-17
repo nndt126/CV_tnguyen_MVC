@@ -18,6 +18,7 @@ namespace tnguyenResume.Bussiness.Model
         public string EducationInfo { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:dd/M/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? EducationDate { get; set; }
 
         [Column(TypeName = "ntext")]

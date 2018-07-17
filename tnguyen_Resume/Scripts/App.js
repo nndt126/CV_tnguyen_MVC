@@ -145,7 +145,7 @@ myApp.controller('workController', function ($scope, $http) {
     //******=========Get Single Work=========******
     $scope.getWorkByID = function (data) {
         ShowRow();
-        $http.get('/Admin/GetbyID/' + data.ID)
+        $http.get('/Admin/GetWorkById/' + data.ID)
         .success(function (data) {
             //debugger;
             $scope.sID = data.ID;
