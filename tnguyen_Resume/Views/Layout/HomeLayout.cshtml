@@ -197,6 +197,40 @@
     <script src="~/Content/js/init.js"></script>
     <script src="http://sibeeshpassion.com/content/scripts/jquery-1.11.1.min.js"></script>
 
+    <script>
+        $("#SendMessage").click(function (event) {
+            var phoneNumer = $("#Phone").val();
+            var isValid = CheckNumberPhone(phoneNumer);
+            if (isValid) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Contact",
+                    data: { firtName: $("#FirstName").val(), phoneNumber: $("#Phone").val(), subject: $("#Subject").val(), message: $("#Message").val() },
+                    headers: { 'VerificationToken': $("#forgeryToken").val() },
+                    success: function (data) {
+                        alert("Cảm ơn bạn đã liên hệ. Tôi sẽ sớm liên hệ với bạn thông qua số điện thoại nhé");
+                    },
+                    error: function (data) {
+                        alert(data.result);
+                    }
+                });
+            }
+            else {
+                event.preventDefault();
+                alert("Phone Number was wrong");
+            }
+        });
+
+        function CheckNumberPhone(phoneNumber)
+        {
+            if ((phoneNumber == "") || (phoneNumber.length < 8) || (phoneNumber.length > 11) || ($.isNumeric(phoneNumber) == false)) {
+                return false;
+            }
+            else
+                return true;
+        }
+    </script>
+
     @*<script>
         document.onkeypress = function (event) {
             event = (event || window.event);

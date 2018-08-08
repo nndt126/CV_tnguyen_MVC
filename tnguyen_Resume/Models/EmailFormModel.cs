@@ -14,7 +14,7 @@ namespace tnguyen_Resume.Models
     {
         [Display(Name = "Name *")]
         public string FirstName { get; set; }
-        [Display(Name = "Phone *")]
+        [Display(Name = "Phone *"), StringLength(11, MinimumLength = 8, ErrorMessage = "Phone number must be at least 8 characters")]
         public string Phone { get; set; }
         public string Subject { get; set; }
         [Required]

@@ -66,24 +66,24 @@ namespace tnguyen_Resume.Controllers
                     if (loginInfo != null)
                     {
                         // Login In.    
-                        this.SignInUser(loginInfo.UserName, loginInfo.ID, false);
+                        this.SignInUser(loginInfo.UserName, loginInfo.ID, model.Remember);
 
                         ViewBag.ThongBao = "Login Successfull!";
                         Session["username"] = loginInfo.UserName;
                         //Session["imageUSer"] = info.Image;
 
-                        if (model.Remember)
-                        {
-                            HttpCookie ckUserName = new HttpCookie("username");
-                            ckUserName.Expires = DateTime.Now.AddSeconds(3600);
-                            ckUserName.Value = loginInfo.UserName;
-                            Response.Cookies.Add(ckUserName);
+                        //if (model.Remember)
+                        //{
+                        //    HttpCookie ckUserName = new HttpCookie("username");
+                        //    ckUserName.Expires = DateTime.Now.AddSeconds(3600);
+                        //    ckUserName.Value = loginInfo.UserName;
+                        //    Response.Cookies.Add(ckUserName);
 
-                            HttpCookie ckPassword = new HttpCookie("password");
-                            ckPassword.Expires = DateTime.Now.AddSeconds(3600);
-                            ckPassword.Value = loginInfo.Password;
-                            Response.Cookies.Add(ckPassword);
-                        }
+                        //    HttpCookie ckPassword = new HttpCookie("password");
+                        //    ckPassword.Expires = DateTime.Now.AddSeconds(3600);
+                        //    ckPassword.Value = loginInfo.Password;
+                        //    Response.Cookies.Add(ckPassword);
+                        //}
                         // Info.    
                         return this.RedirectToLocal(returnUrl);
                     }
@@ -175,7 +175,6 @@ namespace tnguyen_Resume.Controllers
             {
                 // Setting    
                 claims.Add(new Claim(ClaimTypes.Name, username));
-                claims.Add(new Claim(ClaimTypes.UserData, userId.ToString()));
                 var claimIdenties = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
                 var ctx = Request.GetOwinContext();
                 var authenticationManager = ctx.Authentication;

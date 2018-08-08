@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using tnguyenResume.Bussiness.Interface;
+using tnguyen_Resume.Common;
 
 namespace tnguyen_Resume.Controllers
 {
@@ -45,7 +46,7 @@ namespace tnguyen_Resume.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Contact(EmailFormModel model)
+        public async Task<ActionResult> Contact(string firtName, string phoneNumber, string subject, string message)
         {
             if (!ModelState.IsValid)
             {
@@ -53,12 +54,21 @@ namespace tnguyen_Resume.Controllers
             }
             else
             {
-                await MessageService.SendEmailAsync(model.FirstName, model.Phone, model.Subject, model.Message);
-                return View("EmailSent");
-                //string url = Request.UrlReferrer.AbsolutePath + "#contact";
-                //return RedirectToAction(url);
+                string errorMessage = Helper.ValidatePhoneNumber(phoneNumber);
+                if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    ViewBag.ErrorMessage = errorMessage;
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    await MessageService.SendEmailAsync(firtName, phoneNumber, subject, message);
+                    return View("EmailSent");
+                    //string url = Request.UrlReferrer.AbsolutePath + "#contact";
+                    //return RedirectToAction(url);
+                }
             }
-
+            
         }
 
         [HttpGet]
